@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>interesting on </title>
-    <link>https://r-earthengine.github.io/examples/tags/interesting/</link>
+    <link>https://r-earthengine.github.io/tags/interesting/</link>
     <description>Recent content in interesting on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Oct 2018 11:40:14 +0200</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/tags/interesting/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Oct 2018 11:40:14 +0200</lastBuildDate><atom:link href="https://r-earthengine.github.io/tags/interesting/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ninth</title>
-      <link>https://r-earthengine.github.io/examples/posts/ninth/</link>
+      <link>https://r-earthengine.github.io/posts/ninth/</link>
       <pubDate>Sun, 07 Oct 2018 11:40:14 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/ninth/</guid>
+      <guid>https://r-earthengine.github.io/posts/ninth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Eighth</title>
-      <link>https://r-earthengine.github.io/examples/posts/eighth/</link>
+      <link>https://r-earthengine.github.io/posts/eighth/</link>
       <pubDate>Sun, 07 Oct 2018 11:40:11 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/eighth/</guid>
+      <guid>https://r-earthengine.github.io/posts/eighth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Seventh</title>
-      <link>https://r-earthengine.github.io/examples/posts/seventh/</link>
+      <link>https://r-earthengine.github.io/posts/seventh/</link>
       <pubDate>Sun, 07 Oct 2018 11:39:29 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/seventh/</guid>
+      <guid>https://r-earthengine.github.io/posts/seventh/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Sixth</title>
-      <link>https://r-earthengine.github.io/examples/posts/sixth/</link>
+      <link>https://r-earthengine.github.io/posts/sixth/</link>
       <pubDate>Sun, 07 Oct 2018 11:39:25 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/sixth/</guid>
+      <guid>https://r-earthengine.github.io/posts/sixth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Fourth</title>
-      <link>https://r-earthengine.github.io/examples/posts/fourth/</link>
+      <link>https://r-earthengine.github.io/posts/fourth/</link>
       <pubDate>Sun, 07 Oct 2018 11:39:16 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/fourth/</guid>
+      <guid>https://r-earthengine.github.io/posts/fourth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Third</title>
-      <link>https://r-earthengine.github.io/examples/posts/third/</link>
+      <link>https://r-earthengine.github.io/posts/third/</link>
       <pubDate>Sun, 07 Oct 2018 11:39:13 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/third/</guid>
+      <guid>https://r-earthengine.github.io/posts/third/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Second</title>
-      <link>https://r-earthengine.github.io/examples/posts/second/</link>
+      <link>https://r-earthengine.github.io/posts/second/</link>
       <pubDate>Sun, 07 Oct 2018 11:39:10 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/second/</guid>
+      <guid>https://r-earthengine.github.io/posts/second/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>My First Post</title>
-      <link>https://r-earthengine.github.io/examples/posts/my-first-post/</link>
+      <link>https://r-earthengine.github.io/posts/my-first-post/</link>
       <pubDate>Sun, 07 Oct 2018 11:17:14 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/my-first-post/</guid>
+      <guid>https://r-earthengine.github.io/posts/my-first-post/</guid>
       <description>This is my first post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     

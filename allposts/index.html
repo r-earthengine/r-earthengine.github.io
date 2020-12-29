@@ -1,18 +1,4 @@
-<?php
-  $q = '';
-  if (isset($_GET['q']) && $_GET['q'] != '') {
-  
-  $q =$_GET['q'];
-} 
-  
- 
-  $manticore = new mysqli("127.0.0.1", "", "", "", 9306);
-  $q=$manticore->real_escape_string($q);
-  $sphinxQl="SELECT * ,SNIPPET(content,'".$q."','limit=200') as snippet FROM hugo WHERE MATCH('".$q."')";
-  $result = $manticore->query($sphinxQl);
-  
- 
-  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +6,9 @@
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <meta http-equiv="Cache-Control" content="public" />
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+
+
  
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -30,22 +18,24 @@
     
     
 
-<title>Search • rgee Theme</title>
+<title>All posts • rgee Theme</title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Search"/>
-<meta name="twitter:description" content="Manticore Search "/>
+<meta name="twitter:title" content="All posts"/>
+<meta name="twitter:description" content="rgee Theme"/>
 
-<meta property="og:title" content="Search" />
-<meta property="og:description" content="Manticore Search " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://r-earthengine.github.io/search/" />
+<meta property="og:title" content="All posts" />
+<meta property="og:description" content="rgee Theme" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://r-earthengine.github.io/allposts/" />
 <meta property="og:site_name" content="rgee Theme" />
 
 
 
-<link rel="canonical" href="https://r-earthengine.github.io/search/" />
+<link rel="canonical" href="https://r-earthengine.github.io/allposts/" />
+<link href="https://r-earthengine.github.io/allposts/index.xml" rel="alternate" type="application/rss+xml" title="" />
+  <link href="https://r-earthengine.github.io/allposts/index.xml" rel="feed" type="application/rss+xml" title="" />
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -75,42 +65,77 @@
 
     
     <header id="header">
-      <div class="w3-container w3-center w3-padding-32 w3-hide-small"> 
-        <h1 class="w3-xxxlarge w3-text-blue w3-wide w3-allerta  glow " style="text-shadow:1px 1px 0 #444" ><u>
-        
-           Google Earth Engine with R
-        
-  </u></h1>
-        
-  </div>
-  <div class="w3-content w3-center">
-      <div class="w3-bar w3-light-grey w3-border w3-padding">
-        <a href="/" class="w3-bar-item w3-button w3-large w3-green w3-mobile"><i class="fa fa-home"></i></a>
-        <input id="searchinput" name="search" type="text" style="width: 600px;" class="w3-bar-item w3-input w3-white w3-mobile" placeholder="Search.." value="<?php echo  $q;?>">
-        <button type="button" onclick="gosearch()" class="w3-bar-item w3-button w3-green w3-mobile">Go</button>
-      </div>
+         
+        <div class="w3-right ">
+<div class="w3-bar w3-light-grey  ">
+  
 
-     
-  </div>
-<script>
-var input = document.getElementById("searchinput");
-input.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        gosearch();
-    }
-});
-</script>
-  <script>
-function gosearch() {
-    var x;
+  
+      <span class="w3-hide-small">
 
+      </span>
+  
+</div>
+</div>
+<br><br><br><br>
+  <div class="w3-content">  
+  <div class="w3-container w3-center w3-padding-32 w3-hide-small">
+      <div class="rgee-text-wrapper">
+      <img src=https://raw.githubusercontent.com/r-spatial/rgee/master/man/figures/logo.png alt="logo" class="rgee-img-responsive"></img>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="rgee-svg"><path d="M18 2l6 10.5-6 10.5h-12l-6-10.5 6-10.5z"/></svg>    
+      </div>         
+      <br><br><br><br><br>   
+      <h1 class="rgee-title">
+        
+          Google Earth Engine with R
+        
+      </h1>
+      
+    </div>
+    <div class="w3-content w3-center">
+    <div class="w3-bar w3-light-grey w3-border">
+    <a href="/" class="w3-bar-item w3-button w3-large w3-green"><i class="fa fa-home"></i></a>
     
-    x = document.getElementById("searchinput").value;
+      <a href="/categories/" class="w3-bar-item w3-button w3-hide-small">Categories</a>
+    
+      <a href="/tags/" class="w3-bar-item w3-button w3-hide-small">Tags</a>
+    
+      <a href="/allposts/" class="w3-bar-item w3-button w3-hide-small">All Posts</a>
+    
+   
+    
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="displaymenu()">&#9776;</a>
+  </div>
 
-    window.location.replace("https://jesselau.com/q/"+x);
+<div id="mobilemenu" class="w3-bar-block w3-light-grey w3-hide w3-hide-large w3-hide-medium">
+  
+      <a href="/categories/" class="w3-bar-item w3-button">Categories</a>
+      
+      <a href="/tags/" class="w3-bar-item w3-button">Tags</a>
+      
+      <a href="/allposts/" class="w3-bar-item w3-button">All Posts</a>
+      
+  
+</div>
+</div>
+</div>
+<script>
+function displaymenu() {
+    var x = document.getElementById("mobilemenu");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
 }
 </script>
+
+
+
+    
+    <hr class="headfoot">
+   
+      
     </header>
     
 <div class="w3-content">
@@ -118,53 +143,86 @@ function gosearch() {
       <div>
         
         <div id="content" >
-          <?php
-  if ($q<>'')
-   {
-    ?>
+          
 
- <div id="searchresult" class="w3-content w3-card-4" >
-  <?php
-  if (mysqli_num_rows($result)==0)
-  { 
-  	?>
-  	<div class="w3-panel w3-pale-yellow w3-display-container">
-	  <span onclick="this.parentElement.style.display='none'"
-	  class="w3-button w3-large w3-display-topright">&times;</span>
-	  <h3>No Results!</h3>
-	  <p>There are no posts about <b><?php echo $q;?> </b>. Please try another keywords.</p>
-	</div>
-  <?php
-   }
-   else
-   {
-    foreach($result as $row)
-    {
-      ?>
-      <div class ="w3-container" >
-      <div class="w3-panel  w3-card-2"  >
-          <div class="w3-container">
-            <h4> <a href="<?php echo  $row['link'];?>" > <?php echo $row['title'];?>  </a></h4>
-          </div>
 
-          <div class="w3-container">
-            <p> <?php echo strip_tags($row['snippet'],'<b>');?>  </p>
-          </div>
+<script src="/js/w3.js"></script>
+<div class="w3-container w3-card-4">
+<h2>All Posts of Hugo W3 Simple Example Site From Start</h2>
 
-         
-        </div>
-        
-       </div>
-    <?php
-     
-    }
-}
-    ?>
+
+
+
+<p>
+<input oninput="w3.filterHTML('#id01', '.item', this.value)" class="w3-input" placeholder="Search Posts...">
+</p>
+<div style="overflow-x:auto;">
+<table id="id01" class="w3-table-all w3-hoverable">
+  <tr class="w3-green" style="white-space:nowrap;">
+    <th onclick="w3.sortHTML('#id01', '.item', 'td:nth-child(1)')" style="cursor:pointer">Title <i class="fa fa-sort" style="font-size:13px;"></i></th>
+    <th onclick="w3.sortHTML('#id01', '.item', 'td:nth-child(2)')" style="cursor:pointer">Publication Date <i class="fa fa-sort" style="font-size:13px;"></i>&nbsp;&nbsp;</th>
+    <th onclick="w3.sortHTMLbyNumber('#id01', '.item', 'td:nth-child(3)')" style="cursor:pointer">Word Count <i class="fa fa-sort" style="font-size:13px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  </tr>
   
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/w3-simple-shortcodes-demo/">Hugo W3 Simple Theme Shortcodes Demo</a></td>
+    <td>2018/11/09</td>
+    <td>741</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/ninth/">Ninth</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/eighth/">Eighth</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/seventh/">Seventh</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/sixth/">Sixth</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/fourth/">Fourth</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/third/">Third</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/second/">Second</a></td>
+    <td>2018/10/07</td>
+    <td>120</td>
+  </tr>
+  
+  <tr class="item ">
+    <td><a href="https://r-earthengine.github.io/posts/my-first-post/">My First Post</a></td>
+    <td>2018/10/07</td>
+    <td>121</td>
+  </tr>
+  
+  
+</table>
 </div>
-<?php
-}
-?>
+</div>
+
         </div>
         
           <script>
@@ -200,12 +258,10 @@ if ('sidebar' in window && 'addPanel' in window.sidebar) {
 </script>
 </div>
         
-        <div class="w3-container w3-center w3-padding-32"> 
-	  
-	  <p>Search function is powered by <a href="https://manticoresearch.com/">Manticoresearch</a> |  <a href="https://jesselau.com/tags/manticore/">tutorials Here</a>
-	  </p>
-	  
-	</div>
+           
+          
+
+        
         
       </div>
     
@@ -375,13 +431,6 @@ function scrollFunction() {
     
     
     
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        document.getElementById("toc").style.display = "block";
-    } else {
-        document.getElementById("toc").style.display = "none";
-    }
-    
-    
     <!-- cookie bar -->
     
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
@@ -416,11 +465,6 @@ function scrollFunction() {
     
 
     <!-- allowads -->
-    
-       if (document.body.scrollTop > 2000 || document.documentElement.scrollTop > 2000) {
-          detectads();
-       } 
-
     
 }
 

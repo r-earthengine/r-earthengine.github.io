@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>drink on </title>
-    <link>https://r-earthengine.github.io/examples/tags/drink/</link>
+    <link>https://r-earthengine.github.io/tags/drink/</link>
     <description>Recent content in drink on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Oct 2018 11:40:14 +0200</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/tags/drink/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Oct 2018 11:40:14 +0200</lastBuildDate><atom:link href="https://r-earthengine.github.io/tags/drink/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ninth</title>
-      <link>https://r-earthengine.github.io/examples/posts/ninth/</link>
+      <link>https://r-earthengine.github.io/posts/ninth/</link>
       <pubDate>Sun, 07 Oct 2018 11:40:14 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/ninth/</guid>
+      <guid>https://r-earthengine.github.io/posts/ninth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
     <item>
       <title>Sixth</title>
-      <link>https://r-earthengine.github.io/examples/posts/sixth/</link>
+      <link>https://r-earthengine.github.io/posts/sixth/</link>
       <pubDate>Sun, 07 Oct 2018 11:39:25 +0200</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/posts/sixth/</guid>
+      <guid>https://r-earthengine.github.io/posts/sixth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     

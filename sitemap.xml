@@ -3,92 +3,96 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/</loc>
+    <loc>https://r-earthengine.github.io/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/categories/</loc>
+    <loc>https://r-earthengine.github.io/categories/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/hugo/</loc>
+    <loc>https://r-earthengine.github.io/tags/hugo/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/w3-simple-shortcodes-demo/</loc>
+    <loc>https://r-earthengine.github.io/w3-simple-shortcodes-demo/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/</loc>
+    <loc>https://r-earthengine.github.io/posts/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/</loc>
+    <loc>https://r-earthengine.github.io/tags/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/categories/website-programming/</loc>
+    <loc>https://r-earthengine.github.io/categories/website-programming/</loc>
     <lastmod>2018-11-09T07:26:15+13:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/drink/</loc>
+    <loc>https://r-earthengine.github.io/tags/drink/</loc>
     <lastmod>2018-10-07T11:40:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/interesting/</loc>
+    <loc>https://r-earthengine.github.io/tags/interesting/</loc>
     <lastmod>2018-10-07T11:40:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/ninth/</loc>
+    <loc>https://r-earthengine.github.io/posts/ninth/</loc>
     <lastmod>2018-10-07T11:40:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/eighth/</loc>
+    <loc>https://r-earthengine.github.io/posts/eighth/</loc>
     <lastmod>2018-10-07T11:40:11+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/seventh/</loc>
+    <loc>https://r-earthengine.github.io/posts/seventh/</loc>
     <lastmod>2018-10-07T11:39:29+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/sixth/</loc>
+    <loc>https://r-earthengine.github.io/posts/sixth/</loc>
     <lastmod>2018-10-07T11:39:25+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/fourth/</loc>
+    <loc>https://r-earthengine.github.io/posts/fourth/</loc>
     <lastmod>2018-10-07T11:39:16+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/third/</loc>
+    <loc>https://r-earthengine.github.io/posts/third/</loc>
     <lastmod>2018-10-07T11:39:13+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/second/</loc>
+    <loc>https://r-earthengine.github.io/posts/second/</loc>
     <lastmod>2018-10-07T11:39:10+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/my-first-post/</loc>
+    <loc>https://r-earthengine.github.io/posts/my-first-post/</loc>
     <lastmod>2018-10-07T11:17:14+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/search/</loc>
+    <loc>https://r-earthengine.github.io/allposts/</loc>
+  </url>
+  
+  <url>
+    <loc>https://r-earthengine.github.io/search/</loc>
   </url>
   
 </urlset>
