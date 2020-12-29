@@ -1,9 +1,9 @@
-baseurl = "https://r-earthengine.github.io/"
+baseurl = "https://r-earthengine.github.io/examples"
 languageCode = "en-us"
 defaultContentLanguage = "en" # en / zh-CN / ... (This field determines which i18n file to use)
 
 theme = "hugo-w3-simple"
-disqusShortname = ""      # disqus_shortname
+disqusShortname = "http-r-earthengine-github-io"      # disqus_shortname
 googleAnalytics = ""      # UA-XXXXXXXX-X
 paginate = 100 #gridstyle use 3 column. so should be 3,6,9,12,15....
 hasCJKLanguage = false # has chinese/japanese/korean ?

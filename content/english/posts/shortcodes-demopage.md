@@ -1,11 +1,14 @@
 ---
-author: admin
+author: dasda
 categories:
 - Website Programming
+- Website Programming2
+- ddd
 date: "2018-11-09T07:26:15+13:00"
 draft: false
 tags:
 - hugo
+- roy
 title: Hugo W3 Simple Theme Shortcodes Demo
 type: post
 url: /w3-simple-shortcodes-demo/
@@ -13,7 +16,7 @@ w3codecolor: true
 ---
 
 
-This article is about the demo of these shortcodes.
+This article is about the demo of these.
 
 <hr>
 
