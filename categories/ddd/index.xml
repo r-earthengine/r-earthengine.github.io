@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Website Programming on </title>
-    <link>https://r-earthengine.github.io/examples/categories/website-programming/</link>
-    <description>Recent content in Website Programming on </description>
+    <title>ddd on </title>
+    <link>https://r-earthengine.github.io/examples/categories/ddd/</link>
+    <description>Recent content in ddd on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Nov 2018 07:26:15 +1300</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/categories/website-programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Nov 2018 07:26:15 +1300</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/categories/ddd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo W3 Simple Theme Shortcodes Demo</title>
       <link>https://r-earthengine.github.io/examples/w3-simple-shortcodes-demo/</link>

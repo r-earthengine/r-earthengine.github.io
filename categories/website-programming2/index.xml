@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on </title>
-    <link>https://r-earthengine.github.io/examples/tags/hugo/</link>
-    <description>Recent content in hugo on </description>
+    <title>Website Programming2 on </title>
+    <link>https://r-earthengine.github.io/examples/categories/website-programming2/</link>
+    <description>Recent content in Website Programming2 on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Nov 2018 07:26:15 +1300</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Nov 2018 07:26:15 +1300</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/categories/website-programming2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo W3 Simple Theme Shortcodes Demo</title>
       <link>https://r-earthengine.github.io/examples/w3-simple-shortcodes-demo/</link>
@@ -26,6 +26,15 @@ Information!  Blue often indicates a neutral informative change or action.  You 
       
       <guid>https://r-earthengine.github.io/examples/posts/eighth/</guid>
       <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>https://r-earthengine.github.io/examples/posts/my-first-post/</link>
+      <pubDate>Sun, 07 Oct 2018 11:17:14 +0200</pubDate>
+      
+      <guid>https://r-earthengine.github.io/examples/posts/my-first-post/</guid>
+      <description>This is my first post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
     </item>
     
   </channel>
