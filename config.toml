@@ -1,4 +1,4 @@
-baseurl = "https://r-earthengine.github.io/examples/"
+baseurl = "https://r-earthengine.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en" # en / zh-CN / ... (This field determines which i18n file to use)
 
