@@ -1,18 +1,16 @@
 ---
-author: dasda
+author: Roy Yali Samaniego
 categories:
-- Website Programming
-- Website Programming2
-- ddd
-date: "2018-11-09T07:26:15+13:00"
-draft: false
+- proj
+date: "2018-11-09"
 tags:
-- hugo
-- roy
-title: Hugo W3 Simple Theme Shortcodes Demo
+- ee.Image
+- Map.display
+title: demo
 type: post
-url: /w3-simple-shortcodes-demo/
+url: /dasda2/
 w3codecolor: true
+thumbnail: https://raw.githubusercontent.com/jesselau76/hugo-w3-simple/master/exampleSite/images/thumb-joshua-fuller-667473-unsplash.jpg
 ---
 
 

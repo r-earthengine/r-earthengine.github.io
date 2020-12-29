@@ -1,7 +1,6 @@
-baseurl = "https://r-earthengine.github.io/examples"
+baseurl = "https://r-earthengine.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en" # en / zh-CN / ... (This field determines which i18n file to use)
-
 theme = "hugo-w3-simple"
 disqusShortname = "http-r-earthengine-github-io"      # disqus_shortname
 googleAnalytics = ""      # UA-XXXXXXXX-X
@@ -18,7 +17,7 @@ contentDir = "content/english"
       authorinfo = "<h4>Authored By csaybar</h4>"
       licenseinfo = "<p class=\"w3-small\">This article is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" class=\"w3-text-white\">Creative Commons Attribution 4.0 International License</a>.</p>"
       logotext = "Google Earth Engine with R" # logo text
-      rgee_img = "https://raw.githubusercontent.com/r-spatial/rgee/master/man/figures/logo.png"
+      rgee_img = "https://user-images.githubusercontent.com/16768318/103302656-6af99c00-4a04-11eb-99ec-4dea22afa5ee.png"
       isso_baseurl=""  #if you want to use isso as comment system,set your isso js baseurl here. It is like "https://isso.yourwebsite.com/" or "https://yourwebsite.com/isso/"
       isso_langcode="en"
       cookie_info = "This website uses cookies to ensure you get the best experience on our website. [Learn more](/privacy-policy/)"
@@ -40,7 +39,7 @@ contentDir = "content/english"
 [params]
     welcomemessage = false #if set true. The home page will display the content of _index.md
     authorandlicense = true
-    authorimgurl = "https://raw.githubusercontent.com/jesselau76/hugo-w3-simple/master/exampleSite/images/johndoe.jpg" #if authorandlicense set true, this one must be set too
+    authorimgurl = "https://user-images.githubusercontent.com/16768318/103300162-895c9900-49fe-11eb-9b6e-eac9b6d9b132.png" #if authorandlicense set true, this one must be set too
 
     relatedPosts = true
     backtotop = true
