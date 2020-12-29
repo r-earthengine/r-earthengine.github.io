@@ -3,111 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/categories/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/categories/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/categories/ddd/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/dasda2/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/hugo/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/tags/ee.image/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/w3-simple-shortcodes-demo/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/tags/map.display/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/posts/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/posts/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/roy/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/categories/proj/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/tags/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/tags/</loc>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/categories/website-programming/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
+    <loc>https://r-earthengine.github.io/allposts/</loc>
   </url>
   
   <url>
-    <loc>https://r-earthengine.github.io/examples/categories/website-programming2/</loc>
-    <lastmod>2018-11-09T07:26:15+13:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/tags/drink/</loc>
-    <lastmod>2018-10-07T11:40:14+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/tags/interesting/</loc>
-    <lastmod>2018-10-07T11:40:14+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/ninth/</loc>
-    <lastmod>2018-10-07T11:40:14+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/eighth/</loc>
-    <lastmod>2018-10-07T11:40:11+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/seventh/</loc>
-    <lastmod>2018-10-07T11:39:29+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/sixth/</loc>
-    <lastmod>2018-10-07T11:39:25+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/fourth/</loc>
-    <lastmod>2018-10-07T11:39:16+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/third/</loc>
-    <lastmod>2018-10-07T11:39:13+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/second/</loc>
-    <lastmod>2018-10-07T11:39:10+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/posts/my-first-post/</loc>
-    <lastmod>2018-10-07T11:17:14+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/allposts/</loc>
-  </url>
-  
-  <url>
-    <loc>https://r-earthengine.github.io/examples/search/</loc>
+    <loc>https://r-earthengine.github.io/search/</loc>
   </url>
   
 </urlset>

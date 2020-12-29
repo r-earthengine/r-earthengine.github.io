@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>https://r-earthengine.github.io/examples/</link>
+    <link>https://r-earthengine.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Nov 2018 07:26:15 +1300</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hugo W3 Simple Theme Shortcodes Demo</title>
-      <link>https://r-earthengine.github.io/examples/w3-simple-shortcodes-demo/</link>
-      <pubDate>Fri, 09 Nov 2018 07:26:15 +1300</pubDate>
+      <title>demo</title>
+      <link>https://r-earthengine.github.io/dasda2/</link>
+      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/w3-simple-shortcodes-demo/</guid>
+      <guid>https://r-earthengine.github.io/dasda2/</guid>
       <description>This article is about the demo of these.
  Info Shortcodes We can easily display info with this code below on markdown file Code for info shortcodes {{&amp;lt; info &amp;gt;}}
 Blue often indicates a neutral informative change or action. {{&amp;lt;/info &amp;gt;}}   It will display default title with Information!:
@@ -20,83 +20,11 @@ Information!  Blue often indicates a neutral informative change or action.  You 
     </item>
     
     <item>
-      <title>Ninth</title>
-      <link>https://r-earthengine.github.io/examples/posts/ninth/</link>
-      <pubDate>Sun, 07 Oct 2018 11:40:14 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/ninth/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>Eighth</title>
-      <link>https://r-earthengine.github.io/examples/posts/eighth/</link>
-      <pubDate>Sun, 07 Oct 2018 11:40:11 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/eighth/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>Seventh</title>
-      <link>https://r-earthengine.github.io/examples/posts/seventh/</link>
-      <pubDate>Sun, 07 Oct 2018 11:39:29 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/seventh/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>Sixth</title>
-      <link>https://r-earthengine.github.io/examples/posts/sixth/</link>
-      <pubDate>Sun, 07 Oct 2018 11:39:25 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/sixth/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>Fourth</title>
-      <link>https://r-earthengine.github.io/examples/posts/fourth/</link>
-      <pubDate>Sun, 07 Oct 2018 11:39:16 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/fourth/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>Third</title>
-      <link>https://r-earthengine.github.io/examples/posts/third/</link>
-      <pubDate>Sun, 07 Oct 2018 11:39:13 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/third/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>Second</title>
-      <link>https://r-earthengine.github.io/examples/posts/second/</link>
-      <pubDate>Sun, 07 Oct 2018 11:39:10 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/second/</guid>
-      <description>This is another post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
-      <title>My First Post</title>
-      <link>https://r-earthengine.github.io/examples/posts/my-first-post/</link>
-      <pubDate>Sun, 07 Oct 2018 11:17:14 +0200</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/posts/my-first-post/</guid>
-      <description>This is my first post Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero quis dictum dapibus. Nulla egestas vitae augue eu rutrum. Duis ullamcorper dictum ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tortor dui, fermentum non dapibus id, volutpat non odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas fringilla tempus urna ac laoreet. Curabitur sed bibendum lectus.</description>
-    </item>
-    
-    <item>
       <title>Search</title>
-      <link>https://r-earthengine.github.io/examples/search/</link>
+      <link>https://r-earthengine.github.io/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/search/</guid>
+      <guid>https://r-earthengine.github.io/search/</guid>
       <description>Manticore Search </description>
     </item>
     

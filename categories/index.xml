@@ -2,35 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on </title>
-    <link>https://r-earthengine.github.io/examples/categories/</link>
+    <link>https://r-earthengine.github.io/categories/</link>
     <description>Recent content in Categories on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Nov 2018 07:26:15 +1300</lastBuildDate><atom:link href="https://r-earthengine.github.io/examples/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Nov 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ddd</title>
-      <link>https://r-earthengine.github.io/examples/categories/ddd/</link>
-      <pubDate>Fri, 09 Nov 2018 07:26:15 +1300</pubDate>
+      <title>proj</title>
+      <link>https://r-earthengine.github.io/categories/proj/</link>
+      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://r-earthengine.github.io/examples/categories/ddd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Website Programming</title>
-      <link>https://r-earthengine.github.io/examples/categories/website-programming/</link>
-      <pubDate>Fri, 09 Nov 2018 07:26:15 +1300</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/categories/website-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Website Programming2</title>
-      <link>https://r-earthengine.github.io/examples/categories/website-programming2/</link>
-      <pubDate>Fri, 09 Nov 2018 07:26:15 +1300</pubDate>
-      
-      <guid>https://r-earthengine.github.io/examples/categories/website-programming2/</guid>
+      <guid>https://r-earthengine.github.io/categories/proj/</guid>
       <description></description>
     </item>
     

@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>All posts on </title>
-    <link>https://r-earthengine.github.io/examples/allposts/</link>
+    <link>https://r-earthengine.github.io/allposts/</link>
     <description>Recent content in All posts on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://r-earthengine.github.io/examples/allposts/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://r-earthengine.github.io/allposts/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
