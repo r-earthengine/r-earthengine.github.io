@@ -1,0 +1,37 @@
+---
+author: Roy Yali Samaniego
+categories:
+- Get started
+date: "2018-11-09"
+tags:
+- ee.Image
+- print()
+- getInfo()
+title: Hello world
+type: post
+url: /dasda2/
+w3codecolor: true
+thumbnail: https://raw.githubusercontent.com/jesselau76/hugo-w3-simple/master/exampleSite/images/thumb-joshua-fuller-667473-unsplash.jpg
+---
+
+
+```{r}
+library(rgee)
+#ee_reattach() # reattach ee as a reserved word
+
+ee_Initialize()
+
+# traditional R character
+print("Hello world!")
+
+# Earth Engine Python Style
+ee$String("Hello World from Earth Engine!")$getInfo()
+ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318")$getInfo()
+
+# Earth Engine Pipes Style
+ee$String("Hello World from Earth Engine!") %>%
+  ee$String$getInfo()
+
+ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318") %>%
+  ee$Image$getInfo()
+```
