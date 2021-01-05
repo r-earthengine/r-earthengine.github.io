@@ -1,0 +1,218 @@
+---
+author: Cesar Aybar
+categories:
+- introduction
+date: "2020-01-05"
+tags:
+- ee_install
+- ee_initialize
+title: Introduction to Google Earth Engine with R - I
+type: post
+url: /intro_01/
+w3codecolor: true
+thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700-4f86-11eb-8750-5a5920a87d18.png
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/clipboard/clipboard.min.js"></script>
+<link href="/rmarkdown-libs/primer-tooltips/build.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/klippy/css/klippy.min.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
+
+
+<script>
+  addClassKlippyToPreCode();
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
+<div id="what-is-google-earth-engine" class="section level2">
+<h2>1. What is Google Earth Engine ?</h2>
+<p><strong>Google Earth Engine</strong> is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:</p>
+<ul>
+<li><strong>Explorer</strong></li>
+<li><strong>Code Editor</strong></li>
+<li><strong>Javascript client library</strong></li>
+<li><strong>Python client library</strong></li>
+<li><strong>R client library</strong></li>
+</ul>
+<p>This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development <a href="https://github.com/MVanDenburg92/RGEE_Shiny">web applications</a>.</p>
+</div>
+<div id="the-purpose-of-earth-engine-is-to" class="section level2">
+<h2>2. The purpose of Earth Engine is to:</h2>
+<ul>
+<li><p>Perform highly-interactive algorithm development at global scale</p></li>
+<li><p>Push the edge of the envelope for big data in remote sensing</p></li>
+<li><p>Enable high-impact, data-driven science</p></li>
+<li><p>Make substantive progress on global challenges that involve large geospatial datasets</p></li>
+</ul>
+</div>
+<div id="components" class="section level2">
+<h2>3. Components:</h2>
+<p>The main components of Earth Engine are:</p>
+<p><strong>Datasets</strong>: A petabyte-scale archive of publicly available remotely sensed imagery and other data. Explore the data catalog.</p>
+<p><strong>Compute power</strong>: Google’s computational infrastructure optimized for parallel processing of geospatial data.</p>
+<p><strong>WEB REST API/Client libraries</strong>: For making requests to the Earth Engine servers.</p>
+<p><strong>Code Editor</strong>: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the Javascript API.</p>
+</div>
+<div id="meet-earth-engine" class="section level2">
+<h2>4. Meet Earth Engine</h2>
+<p>Users must considerate that the Earth Engine API and advanced Earth Engine functionality <strong>are experimental and subject to change</strong>. Access is limited and requires requesting access via the <a href="https://earthengine.google.com/signup/">form</a>. See <a href="https://earthengine.google.com/">Earth Engine official website</a> to obtain more information.</p>
+<iframe src="https://www.youtube.com/embed/gKGOeTFHnKY" styles="max-width: 70%;height: 500px;" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="why-rgee-instead-of-code-editor-javascript" class="section level2">
+<h2>5. Why rgee instead of code editor (Javascript)?</h2>
+<p>A short comparison based on <a href="https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205">Tyler Erickson presentation</a>.</p>
+<center>
+<table style="border-collapse:collapse;border-color:#ccc;border-spacing:0;border:none" class="tg">
+<thead>
+<tr>
+<th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">
+Code Editor
+</th>
+<th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">
+R
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+Easy to get started
+</td>
+<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+Easy to share code between scripts.
+</td>
+</tr>
+<tr>
+<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+Trivial to share scripts
+</td>
+<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+Easier transition to a web application (<span style="font-weight:bold">Shiny</span>).
+</td>
+</tr>
+<tr>
+<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+Built in authentication
+</td>
+<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+An I/O API more friendly with R users.
+</td>
+</tr>
+<tr>
+<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+<span style="font-weight:bold;color:#FE0000">Limited input/output functionality</span>
+</td>
+<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+Many, many plotting options
+</td>
+</tr>
+<tr>
+<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+<span style="font-weight:bold;color:#FE0000">Integration with other JS libraries is not possible</span>
+</td>
+<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
+<span style="font-weight:bold;color:#FE0000">Some assembly (&amp; maintenance) required!.</span>
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+</div>
+<div id="installation" class="section level2">
+<h2>6. Installation</h2>
+<p><strong>rgee</strong> only depends on <a href="https://cran.r-project.org/web/packages/reticulate/index.html">reticulate</a> and <a href="https://cran.r-project.org/web/packages/processx/index.html">processx</a>. Therefore, users should ensure
+that both packages can be installed on their system. To install <strong>rgee</strong> run as follow:</p>
+<pre class="r"><code>remotes::install_github(&quot;r-spatial/rgee&quot;)</code></pre>
+<p><strong>rgee</strong> has two types of dependencies: <span style="color:#b52b09"><strong>strict dependencies</strong></span> that must be
+satisfied before the <strong>rgee</strong> installation and the <span style="color:#857e04"><b>credentials dependencies</b></span> that
+unlock all <strong>rgee</strong> I/0 functionality.</p>
+<p>If the strict dependencies are not fulfilled <strong>rgee just will not work</strong>. The dependencies that comprised this group are:</p>
+<ul>
+<li><p><span style="color:#b52b09"><b> Google account with Earth Engine
+activated </b></span></p></li>
+<li><p><span style="color:#b52b09"><b> Python &gt;= v3.5 </b></span></p></li>
+<li><p><span style="color:#b52b09"><b> EarthEngine Python API (Python package) </b></span></p></li>
+</ul>
+<p>The activation of an <strong>Earth Engine account</strong> depends on each user, check
+the official website of <a href="https://earthengine.google.com/">Google Earth Engine</a> for more details. If you do not count with a Python environment or a version of the EarthEngine Python API, we strongly recommend you run:</p>
+<pre class="r"><code>library(rgee)
+ee_install(py_env = &quot;rgee&quot;) # It is just necessary once!</code></pre>
+<p>This function will realize the following six tasks:</p>
+<ol style="list-style-type: decimal">
+<li><p>If you do not count with a Python environment, it will display an
+interactive menu to install <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>
+(a free minimal installer for conda).</p></li>
+<li><p>Remove the previous Python environment defined with the same name if it exists.</p></li>
+<li><p>Create a new Python environment.</p></li>
+<li><p>Set the environmental variable EARTHENGINE_PYTHON and EARTHENGINE_ENV. These variables
+will be used to define the reticulate environmental variable “RETICULATE_PYTHON” when
+rgee is loaded.</p></li>
+<li><p>Install rgee Python dependencies: <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python API</a> and
+<a href="https://pypi.org/project/numpy/">Numpy</a>.</p></li>
+<li><p>Interactive menu to confirm if restart the R session to see changes.</p></li>
+</ol>
+<p><strong>However, the use of rgee::ee_install() is not mandatory. You can count on with your own custom installation. This would be also allowed.</strong> If you are a Rstudio v.1.4 &gt; user, this <a href="https://github.com/r-spatial/rgee/tree/help/rstudio"><strong>tutorial</strong></a> will help you to properly set a Python Environment with your R session without <strong>rgee::ee_install()</strong>. Take into account that the Python Environment you set must have installed the <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python API</a> and <a href="https://pypi.org/project/numpy/">Numpy</a>.</p>
+<p>By the other hand, the <span style="color:#857e04"><b>credentials dependencies</b></span>
+are only needed to move data from Google Drive and Google Cloud Storage to your local environment.
+These dependencies are not mandatory. However, they will help you to create a seamless connection between
+R and Earth Engine. The dependencies that comprised this group are shown below:</p>
+<ul>
+<li><p><span style="color:#857e04"><strong>Google Cloud Storage
+credential</strong></span></p></li>
+<li><p><span style="color:#857e04"><strong>Google Drive credential</strong></span></p></li>
+</ul>
+<p>See the next section to learn how to correctly set both credentials.</p>
+</div>
+<div id="authentication" class="section level2">
+<h2>7. Authentication</h2>
+<p>As we have seen previously, <strong>rgee</strong> deal with three different Google API’s:</p>
+<ul>
+<li><p>Google Earth Engine</p></li>
+<li><p>Google Drive</p></li>
+<li><p>Google Cloud Storage</p></li>
+</ul>
+<p>To authenticate/initialize either Google Drive or Google Cloud Storage, you just need to run as follow:</p>
+<pre class="r"><code>library(rgee)
+#ee_reattach() # reattach ee as a reserve word
+
+# Initialize just Earth Engine
+ee_Initialize() 
+ee_Initialize(email = &#39;csaybar@gmail.com&#39;) # Use the argument email is not mandatory
+
+# Initialize Earth Engine and GD
+ee_Initialize(email = &#39;csaybar@gmail.com&#39;, drive = TRUE)
+
+# Initialize Earth Engine and GCS
+ee_Initialize(email = &#39;csaybar@gmail.com&#39;, gcs = TRUE)
+
+# Initialize Earth Engine, GD and GCS
+ee_Initialize(email = &#39;csaybar@gmail.com&#39;, drive = TRUE, gcs = TRUE)</code></pre>
+<p>If the Google account is verified and the permission is granted, you
+will be directed to an authentication token. Copy this token and paste
+it in the emerging GUI. Unlike Earth Engine and Google Drive, Google Cloud
+Storage need to set up its credential manually (<a href="http://code.markedmondson.me/googleCloudStorageR/articles/googleCloudStorageR.html">link1</a> and <a href="https://github.com/r-spatial/rgee/tree/help/gcs">link2</a>). In all cases, the users credentials always will be stored in:</p>
+<pre class="r"><code>ee_get_earthengine_path()</code></pre>
+<p>Remember you only have to authorize once, for next sessions it will not be necessary.</p>
+</div>
+<div id="hello-world" class="section level2">
+<h2>8. Hello World</h2>
+<p>we know that installing <strong>rgee</strong> can be frustrating sometimes :( , so, congratulations to go so far :D :D. In this small example will show you how to display SRTM elevation values worldwide!.</p>
+<pre class="r"><code>library(rgee)
+ee_Initialize()
+srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
+<p><strong>Define visualization parameters</strong></p>
+<pre class="r"><code>viz &lt;- list(
+  max = 4000,
+  min = 0,
+  palette = c(&quot;#000000&quot;,&quot;#5AAD5A&quot;,&quot;#A9AD84&quot;,&quot;#FFFFFF&quot;)
+)</code></pre>
+<p><strong>Use Map$addLayer to visualize the map interactively</strong></p>
+<pre class="r"><code>Map$addLayer(
+  eeObject = srtm,
+  visParams =  viz,
+  name = &#39;SRTM&#39;,
+  legend = TRUE
+)</code></pre>
+</div>

@@ -43,14 +43,88 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
 
 <link rel="stylesheet" href="{{ "/css/w3.css" | relURL }}" />
-<!-- custom css -->
 
+<!-- custom css-->
 <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
 
+<link rel="stylesheet" href="{{ "/css/highlightjs/default.css" | relURL }}" />
+<link rel="stylesheet" href="{{ "/css/highlightjs/textmate.css" | relURL }}" />
+
+<link rel="stylesheet" href="{{ "/css/bootstrap/bootstrap.min.css" | relURL }}" />
+
+
+<!-- custom JS -->
+<script src="{{ "/js/highlightjs/highlight.js" | relURL }}"></script>
+
+<script src="{{ "/js/navigation/codefolding.js" | relURL }}"></script>
+<script src="{{ "/js/navigation/sourceembed.js" | relURL }}"></script>
+<script src="{{ "/js/navigation/tabsets.js" | relURL }}"></script>
+
+<script src="{{ "/js/navigation/bootstrap.min.js" | relURL }}"></script>
+<script src="{{ "/js/navigation/html5shiv.min.js" | relURL }}"></script>
+<script src="{{ "/js/navigation/respond.min.js" | relURL }}"></script>
+
+<!-- JS Custom-->
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<script>
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+
 <!-- One Signal Push -->
-{{ with .Site.Params.onesignalid }}        
-      
-      
+{{ with .Site.Params.onesignalid }}                 
 	<link rel="manifest" href="{{ "/manifest.json" | relURL }}" />
 	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 	<script>

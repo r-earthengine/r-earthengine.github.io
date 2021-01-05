@@ -15,7 +15,7 @@ contentDir = "content/english"
 [languages.en.params]
       title = "rgee Theme"
       authorinfo = "<h4>Authored By csaybar</h4>"
-      licenseinfo = "<p class=\"w3-small\">This article is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" class=\"w3-text-white\">Creative Commons Attribution 4.0 International License</a>.</p>"
+      licenseinfo = "<p class=\"w3-small\"><strong>This article is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by/4.0/\" class=\"w3-text-white\">Creative Commons Attribution 4.0 International License</strong></a>.</p>"
       logotext = "Google Earth Engine with R" # logo text
       rgee_img = "https://user-images.githubusercontent.com/16768318/103302656-6af99c00-4a04-11eb-99ec-4dea22afa5ee.png"
       isso_baseurl=""  #if you want to use isso as comment system,set your isso js baseurl here. It is like "https://isso.yourwebsite.com/" or "https://yourwebsite.com/isso/"
@@ -59,4 +59,4 @@ contentDir = "content/english"
     # adsenseid="ca-pub-123456789"
     allowads = true
     logotext = "HUGO W3 SIMPLE" # logo text
-    footer = "&copy; [Cesar Aybar](https://csaybar.github.io/) 2020 | [Github](https://github.com/csaybar) | [Twitter](https://twitter.com/csaybar)  | [RSS](/index.xml)"
+    footer = "&copy; [rgee](https://github.com/r-spatial/rgee) 2020 | [Github](https://github.com/csaybar) | [Twitter](https://twitter.com/talk_rspatial)  | [RSS](/index.xml)"
