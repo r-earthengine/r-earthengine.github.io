@@ -12,7 +12,7 @@
  
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.80.0" />
 
     
     
@@ -29,7 +29,7 @@
 <meta property="og:description" content="rgee Theme" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://r-earthengine.github.io/tags/" />
-<meta property="og:updated_time" content="2018-11-09T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
+<meta property="og:updated_time" content="2020-01-05T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
 
 
 
@@ -51,6 +51,82 @@
 
 
 <link rel="stylesheet" href="/css/style.css" />
+
+<link rel="stylesheet" href="/css/highlightjs/default.css" />
+<link rel="stylesheet" href="/css/highlightjs/textmate.css" />
+
+<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+
+
+
+<script src="/js/highlightjs/highlight.js"></script>
+
+<script src="/js/navigation/codefolding.js"></script>
+<script src="/js/navigation/sourceembed.js"></script>
+<script src="/js/navigation/tabsets.js"></script>
+
+<script src="/js/navigation/bootstrap.min.js"></script>
+<script src="/js/navigation/html5shiv.min.js"></script>
+<script src="/js/navigation/respond.min.js"></script>
+
+
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<script>
+
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
 
 
 
@@ -153,18 +229,18 @@ function displaymenu() {
       </h2>
       <div class="w3-container w3-center">
         
-          <a href="/tags/ee.image/">
+          <a href="/tags/ee_initialize/">
             <button class="w3-btn w3-round w3-green w3-section">
-          	 ee.image
+          	 ee_initialize
 			<span class="w3-badge w3-red w3-margin-left">1</span>
 			</button>
             
           </a>
            &nbsp; &nbsp;
         
-          <a href="/tags/map.display/">
+          <a href="/tags/ee_install/">
             <button class="w3-btn w3-round w3-green w3-section">
-          	 map.display
+          	 ee_install
 			<span class="w3-badge w3-red w3-margin-left">1</span>
 			</button>
             
@@ -225,7 +301,7 @@ if ('sidebar' in window && 'addPanel' in window.sidebar) {
   <hr class="headfoot">
   <p>Powered by <a href="https://gohugo.io">Hugo</a> | Theme - <a href="https://github.com/jesselau76/hugo-w3-simple">Hugo W3 Simple</a>
   </p>
-  © <a href="https://csaybar.github.io/">Cesar Aybar</a> 2020 | <a href="https://github.com/csaybar">Github</a> | <a href="https://twitter.com/csaybar">Twitter</a>  | <a href="/index.xml">RSS</a>
+  © <a href="https://github.com/r-spatial/rgee">rgee</a> 2020 | <a href="https://github.com/csaybar">Github</a> | <a href="https://twitter.com/talk_rspatial">Twitter</a>  | <a href="/index.xml">RSS</a>
   
 </div>
 

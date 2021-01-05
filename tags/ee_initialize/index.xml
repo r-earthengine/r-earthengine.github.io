@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on </title>
-    <link>https://r-earthengine.github.io/posts/</link>
-    <description>Recent content in Posts on </description>
+    <title>ee_initialize on </title>
+    <link>https://r-earthengine.github.io/tags/ee_initialize/</link>
+    <description>Recent content in ee_initialize on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/tags/ee_initialize/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introduction to Google Earth Engine with R - I</title>
       <link>https://r-earthengine.github.io/intro_01/</link>
