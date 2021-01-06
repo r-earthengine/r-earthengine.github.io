@@ -1,0 +1,732 @@
+---
+author: Cesar Aybar
+categories:
+- introduction
+date: "2020-01-06"
+tags:
+- reduceregions
+- reducetovectors
+- reduceneighborhood
+- fastdistancetransform
+title: basic rgee - Best practices
+type: post
+url: /intro_03/
+w3codecolor: true
+thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700-4f86-11eb-8750-5a5920a87d18.png
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/clipboard/clipboard.min.js"></script>
+<link href="/rmarkdown-libs/primer-tooltips/build.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/klippy/css/klippy.min.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
+
+
+<p><strong>Adapted from <a href="https://developers.google.com/earth-engine/best_practices">Google Earth Engine Documentation</a>.</strong></p>
+<p>This doc describes coding practices that are intended to maximize the chance of success for complex or expensive Earth Engine computations.</p>
+<script>
+  addClassKlippyToPreCode();
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
+<div id="avoid-mixing-client-functions-and-objects-with-server-functions-and-objects" class="section level2">
+<h2>1. Avoid mixing client functions and objects with server functions and objects</h2>
+<p>Earth Engine server objects are objects with constructors that start with <code>ee</code> (e.g. ee$Image, ee$Reducer) and any methods on such objects are server functions. Any object not constructed in this manner is a client object. Client objects may come from the R Earth Engine client (e.g. Map) or the R language (e.g. date, data.frame, c(), list()).</p>
+<p>To avoid unintended behavior, do not mix client and server functions in your script as discussed <a href="https://developers.google.com/earth-engine/debugging#avoid-mixing">here</a> and <a href="https://developers.google.com/earth-engine/debugging#browser-lock">here</a> and <a href="https://developers.google.com/earth-engine/debugging#mapped-functions">here</a>. See <a href="https://developers.google.com/earth-engine/client_server">this page</a> and/or <a href="https://developers.google.com/earth-engine/tutorial_js_01">this tutorial</a> for in-depth explanation of client vs. server in Earth Engine. The following example illustrates the dangers of mixing client and server functionality:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787047-6bfe7f00-503d-11eb-9af5-cde0210161a9.png" width=25px>
+  <strong>Error</strong> — This code doesn’t work!</p>
+<pre class="r"><code># Won&#39;t work.
+for (i in seq_len(table$size())) {
+  print(&#39;No!&#39;) 
+}</code></pre>
+<p>Can you spot the error? Note that <code>table$size()</code> is a server method on a server
+object and can not be used with client-side functionality such as the <code>seq_len</code> function.</p>
+<p>A situation in which you may want to use for-loops is with to display results
+with <code>Map</code>, since the Map object and methods are client-side.</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787100-7c165e80-503d-11eb-968e-2532131e9ded.png" width=25px>
+  <strong>Good</strong> — Use client functions for display Earth Engine spatial objects.</p>
+<pre class="r"><code>l8_ts &lt;- sprintf(
+  &quot;LANDSAT/LC08/C01/T1/LC08_044034_%s&quot;,
+  c(&quot;20140318&quot;, &quot;20140403&quot;,&quot;20140419&quot;,&quot;20140505&quot;)
+)
+display_l8ts &lt;- list()
+for (l8 in l8_ts) {
+  ee_l8 &lt;- ee$Image(l8)
+  display_l8ts[[l8]] &lt;- Map$addLayer(ee_l8)
+}
+Map$centerObject(ee_l8)
+Reduce(&#39;+&#39;, display_l8ts)</code></pre>
+<p>Conversely, <code>map()</code> is a server function and client functionality won’t work
+inside the function passed to map(). For example:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787047-6bfe7f00-503d-11eb-9af5-cde0210161a9.png" width=25px>
+  <strong>Error</strong> — This code doesn’t work!</p>
+<pre class="r"><code>table &lt;- ee$FeatureCollection(&#39;USDOS/LSIB_SIMPLE/2017&#39;)
+# Error:
+foobar &lt;- table$map(function(f) {
+  print(f); # Can&#39;t use a client function here.
+  # Can&#39;t Export, either.
+})</code></pre>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787100-7c165e80-503d-11eb-968e-2532131e9ded.png" width=25px>
+  <strong>Good</strong> — Use <code>map()</code> <code>set()</code>.</p>
+<pre class="r"><code>table &lt;- ee$FeatureCollection(&#39;USDOS/LSIB_SIMPLE/2017&#39;)
+# Do something to every element of a collection.
+withMoreProperties = table$map(function(f) {
+  # Set a property.
+  f$set(&quot;area_sq_meters&quot;, f$area())
+})
+print(withMoreProperties$first()$get(&quot;area_sq_meters&quot;)$getInfo())</code></pre>
+<p>You can also <code>filter()</code> the collection based on computed or existing properties
+and <code>print()</code> the result. Note that you can not print a collection with more
+5000 elements. If you get the “Collection query aborted after accumulating over
+5000 elements” error, <code>filter()</code> or <code>limit()</code> the collection before printing.</p>
+</div>
+<div id="avoid-converting-to-list-unnecessarily" class="section level2">
+<h2>2. Avoid converting to list unnecessarily</h2>
+<p>Collections in Earth Engine are processed using optimizations that are broken by converting the collection to a <code>List</code> or <code>Array</code> type. Unless you need random access to collection elements (i.e. you need to get the i’th element of a collection), use filters on the collection to access individual collection elements. The following example illustrates the difference between type conversion (not recommended) and filtering (recommended) to access an element in a collection:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787047-6bfe7f00-503d-11eb-9af5-cde0210161a9.png" width=25px>
+  <strong>Bad</strong> — Don’t convert to list unnecessarily!</p>
+<pre class="r"><code>table &lt;- ee$FeatureCollection(&#39;USDOS/LSIB_SIMPLE/2017&#39;);
+# Do NOT do this!!
+list &lt;- table$toList(table$size())
+print(list$get(13)$getInfo()) # User memory limit exceeded.</code></pre>
+<p>Note that you can easily trigger errors by converting a collection to a list unnecessarily. The safer way is to use <code>filter()</code>:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787100-7c165e80-503d-11eb-968e-2532131e9ded.png" width=25px>
+  <strong>Good</strong> — Use <code>filter()</code>.</p>
+<pre class="r"><code>print(table$filter(ee$Filter$eq(&#39;country_na&#39;, &#39;Niger&#39;))$first()$getInfo())</code></pre>
+<p>Note that you should <a href="https://developers.google.com/earth-engine/best_practices#filter-and-select-first">use filters as early as possible in your analysis</a>.</p>
+</div>
+<div id="avoid-ee.algorithms.if" class="section level2">
+<h2>3. Avoid <strong>ee.Algorithms.If()</strong></h2>
+<p>Do not use <code>ee.Algorithms.If()</code> to implement branching logic, especially in a mapped function. As the following example illustrates, <code>ee.Algorithms.If()</code> can be memory intensive and is not recommended:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787047-6bfe7f00-503d-11eb-9af5-cde0210161a9.png" width=25px>
+  <strong>Bad</strong> — Don’t use <code>If()</code>:</p>
+<pre class="r"><code>table &lt;- ee.FeatureCollection(&#39;USDOS/LSIB_SIMPLE/2017&#39;)
+# Do NOT do this!
+veryBad = table$map(function(f) {
+  ee$Algorithms$If(
+    condition = ee$String(f$get(&#39;country_na&#39;))$compareTo(&#39;Chad&#39;)$gt(0),
+    trueCase = f,      # Do something.
+    falseCase = NULL   # Do something else.
+  )
+}, TRUE)
+print(veryBad$getInfo()) # User memory limit exceeded.
+# If() may evaluate both the true and false cases.</code></pre>
+<p>Note that the second argument to <code>map()</code> is <code>TRUE</code>. This means that the mapped
+function may return nulls and they will be dropped in the resultant collection.
+That can be useful (without <code>If()</code>), but here the easiest solution is to use a
+filter:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787100-7c165e80-503d-11eb-968e-2532131e9ded.png" width=25px>
+  <strong>Good</strong> — Use <code>filter()</code>.</p>
+<pre class="r"><code>print(table$filter(ee$Filter$eq(&#39;country_na&#39;, &#39;Chad&#39;)))</code></pre>
+<p>As shown in <a href="https://developers.google.com/earth-engine/tutorial_js_03#ifelse-conditions">this tutorial</a>, a functional programming approach using filters is the correct way to apply one logic to some elements of a collection and another logic to the other elements of the collection.</p>
+</div>
+<div id="avoid-reproject" class="section level2">
+<h2>4. Avoid <strong>reproject()</strong></h2>
+<p>Don’t use <code>reproject</code> unless absolutely necessary. One reason you might want to use reproject() is to force <code>Map</code> display computations to happen at a specific scale so you can examine the results at your desired scale of analysis. In the next example, patches of hot pixels are computed and the count of pixels in each patch is computed. Run the example and click on one of the patches. Note that the count of pixels differs between the reprojected data the data that has not been reprojected.</p>
+<pre class="r"><code>l8sr &lt;- ee$ImageCollection(&quot;LANDSAT/LC08/C01/T1_SR&quot;)
+sf &lt;- ee$Geometry$Point(c(-122.405, 37.786))
+Map$centerObject(sf, 13)
+# A reason to reproject - counting pixels and exploring interactively.
+image &lt;- l8sr$filterBounds(sf)$
+  filterDate(&quot;2019-06-01&quot;, &quot;2019-12-31&quot;)$
+  first()
+Map$addLayer(image, list(bands = &quot;B10&quot;, min = 2800, max = 3100), &quot;image&quot;)
+hotspots &lt;- image$select(&quot;B10&quot;)$
+  gt(3100)$
+  selfMask()$
+  rename(&quot;hotspots&quot;)
+objectSize &lt;- hotspots$connectedPixelCount(256)
+# Beware of reproject!  Don&#39;t zoom out on reprojected data.
+reprojected &lt;- objectSize$reproject(hotspots$projection())
+Map$addLayer(objectSize, list(min = 1, max = 256), &quot;Size No Reproject&quot;, FALSE) +
+Map$addLayer(reprojected, list(min = 1, max = 256), &quot;Size Reproject&quot;, FALSE)</code></pre>
+<p>The reason for the discrepancy is because the <a href="https://developers.google.com/earth-engine/scale#scale-of-analysis">scale of analysis</a> is set by the Code Editor zoom level. By calling <code>reproject()</code> you set the scale of the computation instead of the Map display. Use <code>reproject()</code> with extreme caution for reasons described in <a href="https://developers.google.com/earth-engine/projections#reprojecting">this doc</a>.</p>
+</div>
+<div id="filter-and-select-first" class="section level2">
+<h2>5. Filter and <strong>select()</strong> first</h2>
+<p>In general, filter input collections by time, location and/or metadata prior to doing anything else with the collection. Apply more selective filters before less selective filters. Spatial and/or temporal filters are often more selective. For example, note that <code>select()</code> and <code>filter()</code> are applied before <code>map()</code>:</p>
+<pre class="r"><code>images &lt;- ee$ImageCollection(&quot;COPERNICUS/S2_SR&quot;)
+sf &lt;- ee$Geometry$Point(c(-122.463, 37.768))
+# Expensive function to reduce the neighborhood of an image.
+reduceFunction &lt;- function(image) {
+  image$reduceNeighborhood(
+    reducer = ee$Reducer$mean(),
+    kernel = ee$Kernel$square(4)
+  )
+}
+bands &lt;- list(&quot;B4&quot;, &quot;B3&quot;, &quot;B2&quot;)
+# Select and filter first!
+reasonableComputation &lt;- images$select(bands)$
+  filterBounds(sf)$
+  filterDate(&quot;2018-01-01&quot;, &quot;2019-02-01&quot;)$
+  filter(ee$Filter$lt(&quot;CLOUDY_PIXEL_PERCENTAGE&quot;, 1))$
+  aside(ee_print)$ # Useful for debugging.
+  map(reduceFunction)$
+  reduce(&#39;mean&#39;)$
+  rename(bands)
+viz &lt;- list(bands = bands, min = 0, max = 10000)
+Map$addLayer(reasonableComputation, viz, &quot;resonableComputation&quot;)</code></pre>
+</div>
+<div id="use-updatemask-instead-of-mask" class="section level2">
+<h2>6. Use <strong>updateMask()</strong> instead of <strong>mask()</strong></h2>
+<p>The difference between <code>updateMask()</code> and <code>mask()</code> is that the former does a logical <code>and()</code> of the argument (the new mask) and the existing image mask whereas <code>mask()</code> simply replaces the image mask with the argument. The danger of the latter is that you can unmask pixels unintentionally. In this example, the goal is to mask pixels less than or equal to 300 meters elevation. As you can see (zoom out), using <code>mask()</code> causes a lot of pixels to become unmasked, pixels that don’t belong in the image of interest:</p>
+<pre class="r"><code>l8sr &lt;- ee$ImageCollection(&quot;LANDSAT/LC08/C01/T1_SR&quot;)
+sf &lt;- ee$Geometry$Point(c(-122.40554461769182, 37.786807309873716))
+aw3d30 &lt;- ee$Image(&quot;JAXA/ALOS/AW3D30_V1_1&quot;)
+Map$centerObject(sf, 7)
+image &lt;- l8sr$filterBounds(sf)$filterDate(&quot;2019-06-01&quot;, &quot;2019-12-31&quot;)$first()
+vis &lt;- list(bands = c(&quot;B4&quot;, &quot;B3&quot;, &quot;B2&quot;), min = 0, max = 3000)
+Map$addLayer(image, vis, &quot;image&quot;, FALSE)
+mask &lt;- aw3d30$select(&quot;AVE&quot;)$gt(300)
+Map$addLayer(mask, {}, &#39;mask&#39;, FALSE)
+# NO!  Don&#39;t do this!
+badMask &lt;- image$mask(mask)
+Map$addLayer(badMask, vis, &quot;badMask&quot;)
+goodMask &lt;- image.updateMask(mask)
+Map$addLayer(goodMask, vis, &quot;goodMask&quot;, FALSE)</code></pre>
+</div>
+<div id="combine-reducers" class="section level2">
+<h2>7. Combine reducers</h2>
+<p>If you need multiple statistics (e.g. mean and standard deviation) from a single input (e.g. an image region), it is more efficient to combine reducers. For example, to get image statistics, combine reducers as follows:</p>
+<pre class="r"><code>image &lt;- ee$Image(&#39;COPERNICUS/S2/20150821T111616_20160314T094808_T30UWU&#39;)
+# Get mean and SD in every band by combining reducers.
+stats &lt;- image$reduceRegion(
+  reducer = ee$Reducer$mean()$combine(
+    reducer2 = ee$Reducer$stdDev(),
+    sharedInputs = TRUE
+  ),
+  geometry = ee$Geometry$Rectangle(c(-2.15, 48.55, -1.83, 48.72)),
+  scale = 10,
+  bestEffort = TRUE # Use maxPixels if you care about scale.
+)
+print(stats$getInfo())
+# Extract means and SDs to images.
+meansImage &lt;- stats$toImage()$select(&#39;.*_mean&#39;)
+sdsImage &lt;- stats$toImage()$select(&#39;.*_stdDev&#39;)</code></pre>
+<p>In this example, note that the mean reducer is combined with the standard deviation reducer and <code>sharedInputs</code> is true to enable a single pass through the input pixels. In the output dictionary, the name of the reducer is appended to the band name. To get mean and SD images (for example to normalize the input image), you can turn the values into an image and use regexes to extract means and SDs individually as demonstrated in the example.</p>
+</div>
+<div id="use-export" class="section level2">
+<h2>8. Use <strong>Export</strong></h2>
+<p>For computations that result in “User memory limit exceeded” or “Computation timed out” errors in the Code Editor, the same computations may be able to succeed by using <code>Export</code>. This is because the timeouts are longer and the allowable memory footprint is larger when running in the batch system (where exports run). (There are other approaches you may want to try first as detailed in the debugging doc). Continuing the previous example, suppose that dictionary returned an error. You could obtain the results by doing something like:</p>
+<pre class="r"><code>link &lt;- &#39;86836482971a35a5e735a17e93c23272&#39;
+task &lt;- ee$batch$Export$table$toDrive(
+  collection = ee$FeatureCollection(ee$Feature(NULL, stats)),
+  description = paste0(&quot;exported_stats_demo_&quot;, link),
+  fileFormat = &quot;CSV&quot;
+)
+# Using rgee I/O
+task &lt;- ee_table_to_drive(
+  collection = ee$FeatureCollection(ee$Feature(NULL, stats)),
+  description = paste0(&quot;exported_stats_demo_&quot;, link),
+  fileFormat = &quot;CSV&quot;
+)
+task$start()
+ee_monitoring(task)
+exported_stats &lt;- ee_drive_to_local(task = task,dsn = &quot;exported_stats.csv&quot;)
+read.csv(exported_stats)</code></pre>
+<p>Note that the link is embedded into the asset name, for reproducibility. Also note that if you want to export <code>toAsset</code>, you will need to supply a geometry, which can be anything, for example the image centroid, which is small and cheap to compute. (i.e. don’t use a complex geometry if you don’t need it).</p>
+<p>See the debugging page for examples of using <code>Export</code> to resolve <a href="https://developers.google.com/earth-engine/debugging#timed-out">Computation</a> timed out and <a href="https://developers.google.com/earth-engine/debugging#too-many">Too many concurrent aggregations</a>. See <a href="https://developers.google.com/earth-engine/exporting">this doc</a> for details on exporting in general.</p>
+</div>
+<div id="if-you-dont-need-to-clip-dont-use-clip" class="section level2">
+<h2>9. If you don’t need to clip, don’t use clip()</h2>
+<p>Using <code>clip()</code> unnecessarily will increase computation time. Avoid <code>clip()</code> unless it’s necessary to your analysis. If you’re not sure, don’t clip. An example of a bad use of clip:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787047-6bfe7f00-503d-11eb-9af5-cde0210161a9.png" width=25px>
+  <strong>Bad</strong> — Don’t clip inputs unnecessarily!</p>
+<pre class="r"><code>table &lt;- ee$FeatureCollection(&#39;USDOS/LSIB_SIMPLE/2017&#39;)
+l8sr &lt;- ee$ImageCollection(&#39;LANDSAT/LC08/C01/T1_SR&#39;)
+chad &lt;- table$filter(ee$Filter$eq(&#39;country_na&#39;, &#39;Chad&#39;))$first()
+# Do NOT clip unless you need to.
+unnecessaryClip &lt;- l8sr$
+  select(&#39;B4&#39;)$                           # Good.
+  filterBounds(chad$geometry())$          # Good.
+  filterDate(&#39;2019-01-01&#39;, &#39;2019-12-31&#39;)$ # Good.
+  map(function(image) {
+    image$clip(chad$geometry())   # NO! Bad! Not necessary.
+  })$
+  median()$
+  reduceRegion(
+    reducer = ee$Reducer$mean(),
+    geometry = chad$geometry(),
+    scale = 30,
+    maxPixels = 1e10
+  )
+print(unnecessaryClip$getInfo())</code></pre>
+<p>Clipping the input images can be skipped entirely, because the region is specified in the <code>reduceRegion()</code> call:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787100-7c165e80-503d-11eb-968e-2532131e9ded.png" width=25px>
+  <strong>Good</strong> — Specify the region on the output.</p>
+<pre class="r"><code>noClipNeeded &lt;- l8sr$
+  select(&#39;B4&#39;)$                          # Good.
+  filterBounds(chad$geometry())$          # Good.
+  filterDate(&#39;2019-01-01&#39;, &#39;2019-12-31&#39;)$ # Good.
+  median()$
+  reduceRegion(
+    reducer = ee$Reducer$mean(),
+    geometry = chad$geometry(), # Geometry is specified here.
+    scale = 30,
+    maxPixels = 1e10
+  )
+print(noClipNeeded$getInfo())</code></pre>
+<p>If this computation times out, <code>Export</code> it as in <a href="https://developers.google.com/earth-engine/best_practices#use-export">this example</a>.</p>
+</div>
+<div id="if-you-need-to-clip-with-a-complex-collection-use-cliptocollection" class="section level2">
+<h2>10. If you need to clip with a complex collection, use <strong>clipToCollection()</strong></h2>
+<p>If you really need to clip something, and the geometries you want to use for clipping are in a collection, use <code>clipToCollection()</code>:</p>
+<pre class="r"><code>ecoregions &lt;- ee$FeatureCollection(&#39;RESOLVE/ECOREGIONS/2017&#39;)
+image &lt;- ee$Image(&#39;JAXA/ALOS/AW3D30_V1_1&#39;)
+complexCollection &lt;- ecoregions$
+  filter(
+    ee$Filter$eq(
+      &#39;BIOME_NAME&#39;,
+      &#39;Tropical &amp; Subtropical Moist Broadleaf Forests&#39;
+    )
+  )
+Map$addLayer(complexCollection, {}, &#39;complexCollection&#39;)
+clippedTheRightWay &lt;- image$select(&#39;AVE&#39;)$
+  clipToCollection(complexCollection)
+Map$addLayer(clippedTheRightWay, {}, &#39;clippedTheRightWay&#39;, FALSE)</code></pre>
+<p>Do NOT use <code>featureCollection.geometry()</code> or <code>featureCollection.union()</code> on
+large and/or complex collections, which can be more memory intensive.</p>
+</div>
+<div id="dont-use-a-complex-collection-as-the-region-for-a-reducer" class="section level2">
+<h2>11. Don’t use a complex collection as the region for a reducer</h2>
+<p>If you need to do a spatial reduction such that the reducer pools inputs from multiple regions in a <code>FeatureCollection</code>, don’t supply <code>featureCollection.geometry()</code> as the <code>geometry</code> input to the reducer. Instead, use <code>clipToCollection()</code> and a region large enough to encompass the bounds of the collection. For example:</p>
+<pre class="r"><code>ecoregions &lt;- ee$FeatureCollection(&#39;RESOLVE/ECOREGIONS/2017&#39;)
+image &lt;- ee$Image(&#39;JAXA/ALOS/AW3D30_V1_1&#39;)
+complexCollection &lt;- ecoregions$filter(
+  ee$Filter$eq(&#39;BIOME_NAME&#39;, &#39;Tropical &amp; Subtropical Moist Broadleaf Forests&#39;)
+)
+clippedTheRightWay &lt;- image$select(&#39;AVE&#39;)$clipToCollection(complexCollection)
+Map$addLayer(clippedTheRightWay, {}, &#39;clippedTheRightWay&#39;)
+reduction &lt;- clippedTheRightWay$reduceRegion(
+  reducer = ee$Reducer$mean(),
+  geometry = ee$Geometry$Rectangle(
+    coords = c(-179.9, -50, 179.9, 50),  # Almost global.
+    geodesic = FALSE
+  ),
+  scale = 30,
+  maxPixels = 1e12
+)
+print(reduction$getInfo()) # If this times out, export it.</code></pre>
+</div>
+<div id="use-a-non-zero-errormargin" class="section level2">
+<h2>12. Use a non-zero <strong>errorMargin</strong></h2>
+<p>For possibly expensive geometry operations, use the largest error margin possible given the required precision of the computation. The error margin specifies the maximum allowable error (in meters) permitted during operations on geometries (e.g. during reprojection). Specifying a small error margin can result in the need to densify geometries (with coordinates), which can be memory intensive. It’s good practice to specify as large an error margin as possible for your computation:</p>
+<pre class="r"><code>ecoregions &lt;- ee$FeatureCollection(&quot;RESOLVE/ECOREGIONS/2017&quot;)
+complexCollection &lt;- ecoregions$limit(10)
+Map$centerObject(complexCollection)
+Map$addLayer(complexCollection)
+expensiveOps &lt;- complexCollection$map(function(f) {
+  f$buffer(10000, 200)$bounds(200)
+})
+Map$addLayer(expensiveOps, {}, &#39;expensiveOps&#39;)</code></pre>
+</div>
+<div id="dont-use-a-ridiculously-small-scale-with-reducetovectors" class="section level2">
+<h2>13. Don’t use a ridiculously small scale with <strong>reduceToVectors()</strong></h2>
+<p>If you want to convert a raster to a vector, use an appropriate scale. Specifying a very small scale can substantially increase computation cost. Set scale as high as possible give the required precision. For example, to get polygons representing global land masses:</p>
+<pre class="r"><code>etopo &lt;- ee$Image(&#39;NOAA/NGDC/ETOPO1&#39;)
+# Approximate land boundary.
+bounds &lt;- etopo$select(0)$gt(-100)
+# Non-geodesic polygon.
+almostGlobal &lt;- ee$Geometry$Polygon(
+  coords = list(
+    c(-180, -80),
+    c(180, -80),
+    c(180, 80),
+    c(-180, 80),
+    c(-180, -80)
+  ),
+  proj = &quot;EPSG:4326&quot;,
+  geodesic = FALSE
+)
+Map$addLayer(almostGlobal, {}, &quot;almostGlobal&quot;)
+vectors &lt;- bounds$selfMask()$reduceToVectors(
+  reducer = ee$Reducer$countEvery(),
+  geometry = almostGlobal,
+  # Set the scale to the maximum possible given
+  # the required precision of the computation.
+  scale = 50000
+)
+Map$addLayer(vectors, {}, &quot;vectors&quot;)</code></pre>
+<p>In the previous example, note the use of a non-geodesic polygon for use in global reductions.</p>
+</div>
+<div id="dont-use-reducetovectors-with-reduceregions" class="section level2">
+<h2>14. Don’t use <strong>reduceToVectors()</strong> with <strong>reduceRegions()</strong></h2>
+<p>Don’t use a <code>FeatureCollection</code> returned by <code>reduceToVectors()</code> as an input to <code>reduceRegions()</code>. Instead, add the bands you want to reduce before calling <code>reduceToVectors()</code>:</p>
+<pre class="r"><code>etopo &lt;- ee$Image(&#39;NOAA/NGDC/ETOPO1&#39;)
+mod11a1 &lt;- ee$ImageCollection(&#39;MODIS/006/MOD11A1&#39;)
+# Approximate land boundary.
+bounds &lt;- etopo$select(0)$gt(-100)
+# Non-geodesic polygon.
+almostGlobal &lt;- ee$Geometry$Polygon(
+  coords = list(c(-180, -80), c(180, -80), c(180, 80), c(-180, 80), c(-180, -80)),
+  proj = &quot;EPSG:4326&quot;,
+  geodesic = FALSE
+)
+lst &lt;- mod11a1$first()$select(0)
+means &lt;- bounds$selfMask()$addBands(lst)$reduceToVectors(
+  reducer = ee$Reducer$mean(),
+  geometry = almostGlobal,
+  scale = 1000,
+  maxPixels = 1e10
+)
+print(means$limit(10)$getInfo())</code></pre>
+<p>Note that other ways of reducing pixels of one image within zones of another include <a href="https://developers.google.com/earth-engine/api_docs#ee.image.reduceconnectedcomponents">reduceConnectedCommponents()</a> and/or <a href="https://developers.google.com/earth-engine/api_docs#ee.image.reduceconnectedcomponents">grouping reducers</a>.</p>
+</div>
+<div id="use-fastdistancetransform-for-neighborhood-operations" class="section level2">
+<h2>15. Use <strong>fastDistanceTransform()</strong> for neighborhood operations</h2>
+<p>For some convolution operations, <code>fastDistanceTransform()</code> may be more efficient than <code>reduceNeighborhood()</code> or <code>convolve()</code>. For example, to do erosion and/or dilation of binary inputs:</p>
+<pre class="r"><code>aw3d30 &lt;- ee$Image(&quot;JAXA/ALOS/AW3D30_V1_1&quot;)
+# Make a simple binary layer from a threshold on elevation.
+mask &lt;- aw3d30$select(&quot;AVE&quot;)$gt(300)
+Map$setCenter(-122.0703, 37.3872, 11)
+Map$addLayer(mask, {}, &quot;mask&quot;)
+# Distance in pixel units.
+distance &lt;- mask$fastDistanceTransform()$sqrt()
+# Threshold on distance (three pixels) for a dilation.
+dilation &lt;- distance$lt(3)
+Map$addLayer(dilation, {}, &quot;dilation&quot;)
+# Do the reverse for an erosion.
+notDistance &lt;- mask$Not()$fastDistanceTransform()$sqrt()
+erosion &lt;- notDistance$gt(3)
+Map$addLayer(erosion, {}, &#39;erosion&#39;)</code></pre>
+</div>
+<div id="use-the-optimizations-in-reduceneighborhood" class="section level2">
+<h2>16. Use the optimizations in <strong>reduceNeighborhood()</strong></h2>
+<p>If you need to perform a convolution and can’t use <code>fastDistanceTransform()</code>, use the optimizations in <code>reduceNeighborhood()</code>.</p>
+<pre class="r"><code>l8raw &lt;- ee$ImageCollection(&#39;LANDSAT/LC08/C01/T1_RT&#39;)
+composite &lt;- ee$Algorithms$Landsat$simpleComposite(l8raw)
+bands &lt;- c(&#39;B4&#39;, &#39;B3&#39;, &#39;B2&#39;)
+optimizedConvolution &lt;- composite$select(bands)$reduceNeighborhood(
+  reducer = ee$Reducer$mean(),
+  kernel = ee$Kernel$square(3),
+  optimization = &quot;boxcar&quot; # Suitable optimization for mean.
+)$rename(bands)
+viz &lt;- list(bands = bands, min = 0, max = 72)
+Map$setCenter(-122.0703, 37.3872, 11)
+Map$addLayer(composite, viz, &quot;composite&quot;) +
+Map$addLayer(optimizedConvolution, viz, &quot;optimizedConvolution&quot;)</code></pre>
+</div>
+<div id="dont-sample-more-data-than-you-need" class="section level2">
+<h2>17. Don’t sample more data than you need</h2>
+<p>Resist the urge to increase your training dataset size unnecessarily. Although increasing the amount of training data is an effective machine learning strategy in some circumstances, it can also increase computational cost with no corresponding increase in accuracy. (For an understanding of when to increase training dataset size, see <a href="https://www.deeplearning.ai/machine-learning-yearning/">this reference</a>). The following example demonstrates how requesting too much training data can result in the dreaded “Computed value is too large” error:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787047-6bfe7f00-503d-11eb-9af5-cde0210161a9.png" width=25px>
+  <strong>Bad</strong> — Don’t sample too much data!</p>
+<pre class="r"><code>l8raw &lt;- ee$ImageCollection(&#39;LANDSAT/LC08/C01/T1_RT&#39;)
+composite &lt;- ee$Algorithms$Landsat$simpleComposite(l8raw)
+labels &lt;- ee$FeatureCollection(&#39;projects/google/demo_landcover_labels&#39;)
+# No!  Not necessary.  Don&#39;t do this:
+labels &lt;- labels$map(function(f){f$buffer(100000, 1000)})
+bands &lt;- c(&#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;)
+training &lt;- composite$select(bands)$sampleRegions(
+  collection = labels,
+  properties = list(&quot;landcover&quot;),
+  scale = 30
+)
+classifier &lt;- ee$Classifier$smileCart()$train(
+  features = training,
+  classProperty = &quot;landcover&quot;,
+  inputProperties = bands
+)
+print(classifier$explain()) # Computed value is too large</code></pre>
+<p>The better approach is to start with a moderate amount of data and tune the hyperparameters of the classifier to determine if you can achieve your desired accuracy:</p>
+<p><img src="https://user-images.githubusercontent.com/16768318/103787100-7c165e80-503d-11eb-968e-2532131e9ded.png" width=25px>
+  <strong>Good</strong> — Tune hyperparameters.</p>
+<pre class="r"><code>l8raw &lt;- ee$ImageCollection(&quot;LANDSAT/LC08/C01/T1_RT&quot;)
+composite &lt;- ee$Algorithms$Landsat$simpleComposite(l8raw)
+labels &lt;- ee$FeatureCollection(&quot;projects/google/demo_landcover_labels&quot;)
+# Increase the data a little bit, possibly introducing noise.
+labels &lt;- labels$map(function(f) {f$buffer(100, 10)})
+bands &lt;- c(&#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;)
+data &lt;- composite$select(bands)$sampleRegions(
+  collection = labels,
+  properties = list(&quot;landcover&quot;),
+  scale = 30
+)
+# Add a column of uniform random numbers called &#39;random&#39;.
+data &lt;- data$randomColumn()
+# Partition into training and testing.
+training &lt;- data$filter(ee$Filter$lt(&quot;random&quot;, 0.5))
+testing &lt;- data$filter(ee$Filter$gte(&quot;random&quot;, 0.5))
+# Tune the minLeafPopulation parameter.
+minLeafPops &lt;- ee$List$sequence(1, 10)
+accuracies &lt;- minLeafPops$map(
+  ee_utils_pyfunc(
+    function(p) {
+      classifier &lt;- ee$Classifier$smileCart(minLeafPopulation = p)$
+        train(
+          features = training,
+          classProperty = &quot;landcover&quot;,
+          inputProperties = bands
+        )
+      
+      testing$
+        classify(classifier)$
+        errorMatrix(&quot;landcover&quot;, &quot;classification&quot;)$
+        accuracy()
+    }
+  )
+)
+minLeafPopulation_array &lt;- accuracies$getInfo()
+plot(
+  x = minLeafPopulation_array,
+  type = &quot;b&quot;, 
+  col = &quot;blue&quot;,
+  lwd = 2,
+  ylab = &quot;accuracy&quot;,
+  xlim = c(0,10),
+  xlab = &quot;value&quot;,
+  main = &quot;Hyperparameter tunning (minLeafPopulation)&quot;
+)</code></pre>
+<p>In this example, the classifier is already very accurate, so there’s not much tuning to do. You might want to choose the smallest tree possible (i.e. largest <code>minLeafPopulation</code>) that still has the required accuracy.</p>
+</div>
+<div id="export-intermediate-results" class="section level2">
+<h2>18. <strong>Export</strong> intermediate results</h2>
+<p>Suppose your objective is to take samples from a relatively complex computed image. It is often more efficient to <code>Export</code> the image <code>toAsset()</code>, load the exported image, then sample. For example:</p>
+<pre class="r"><code>image &lt;- ee$Image(&#39;UMD/hansen/global_forest_change_2018_v1_6&#39;)
+geometry &lt;- ee$Geometry$Polygon(
+  coords = list(
+    c(-76.64069800085349, 5.511777325802095),
+    c(-76.64069800085349, -20.483938229362376),
+    c(-35.15632300085349, -20.483938229362376),
+    c(-35.15632300085349, 5.511777325802095)
+  ),
+  proj =  &quot;EPSG:4326&quot;,
+  geodesic =  FALSE
+)
+testRegion &lt;- ee$Geometry$Polygon(
+  coords = list(
+    c(-48.86726050085349, -3.0475996402515717),
+    c(-48.86726050085349, -3.9248707849303295),
+    c(-47.46101050085349, -3.9248707849303295),
+    c(-47.46101050085349, -3.0475996402515717)
+  ),
+  proj = &quot;EPSG:4326&quot;,
+  geodesic = FALSE
+)
+# Forest loss in 2016, to stratify a sample.
+loss &lt;- image$select(&quot;lossyear&quot;)
+loss16 &lt;- loss$eq(16)$rename(&quot;loss16&quot;)
+# Cloud masking function.
+maskL8sr &lt;- function(image) {
+  cloudShadowBitMask &lt;- bitwShiftL(1, 3)
+  cloudsBitMask &lt;- bitwShiftL(1, 5)
+  qa &lt;- image$select(&#39;pixel_qa&#39;)
+  mask &lt;- qa$bitwiseAnd(cloudShadowBitMask)$eq(0)$
+    And(qa$bitwiseAnd(cloudsBitMask)$eq(0))
+  
+  image$updateMask(mask)$
+    divide(10000)$
+    select(&quot;B[0-9]*&quot;)$
+    copyProperties(image, list(&quot;system:time_start&quot;))
+}
+collection &lt;- ee$ImageCollection(&quot;LANDSAT/LC08/C01/T1_SR&quot;)$map(maskL8sr)
+# Create two annual cloud-free composites.
+composite1 &lt;- collection$filterDate(&#39;2015-01-01&#39;, &#39;2015-12-31&#39;)$median()
+composite2 &lt;- collection$filterDate(&#39;2017-01-01&#39;, &#39;2017-12-31&#39;)$median()
+# We want a strtatified sample of this stack.
+stack &lt;- composite1$addBands(composite2)$float() # Export the smallest size possible.
+# Export the image.  This block is commented because the export is complete.
+# link &lt;- &quot;0b8023b0af6c1b0ac7b5be649b54db06&quot;
+# desc &lt;- paste0(ee_get_assethome(), &quot;/Logistic_regression_stack_&quot;, link)
+# 
+# #ee_image_info(stack)
+# task &lt;- ee_image_to_asset(
+#   image = stack,
+#   description = link,
+#   assetId = desc,
+#   region = geometry,
+#   scale = 100,
+#   maxPixels = 1e10
+# )
+  
+# Load the exported image.
+exportedStack &lt;- ee$Image(
+  &quot;projects/google/Logistic_regression_stack_0b8023b0af6c1b0ac7b5be649b54db06&quot;
+)
+# Take a very small sample first, to debug.
+testSample &lt;- exportedStack$addBands(loss16)$stratifiedSample(
+  numPoints = 1,
+  classBand = &quot;loss16&quot;,
+  region = testRegion,
+  scale = 30,
+  geometries = TRUE
+)
+print(testSample$getInfo()) # Check this in the console.
+# Take a large sample.
+sample &lt;- exportedStack$addBands(loss16)$stratifiedSample(
+  numPoints = 10000,
+  classBand = &quot;loss16&quot;,
+  region = geometry,
+  scale = 30
+)
+# Export the large sample...</code></pre>
+<p>In this example, note that the imagery is exported as float. Don’t export at double precision unless absolutely necessary.</p>
+<p>Once the export is completed, reload the asset and proceed with sampling from it. Note that a very small sample over a very small test area is run first, for debugging. When that is shown to succeed, take a larger sample and export it. Such large samples typically need to be exported. Do not expect such samples to be available interactively (for example through <code>print()</code>) or useable (for example as input to a classifier) without exporting them first.</p>
+</div>
+<div id="join-vs.-map-filter" class="section level2">
+<h2>19. Join vs. map-filter</h2>
+<p>Suppose you want to join collections based on time, location or some metadata property. Generally, this is most efficiently accomplished with a join. The following example does a spatio-temporal join between the Landsat 8 and Sentinel-2 collections:</p>
+<pre class="r"><code>s2 &lt;- ee$ImageCollection(&quot;COPERNICUS/S2&quot;)$
+  filterBounds(ee$Geometry$Point(c(-2.0205, 48.647)))
+l8 &lt;- ee$ImageCollection(&quot;LANDSAT/LC08/C01/T1_SR&quot;)
+joined &lt;- ee$Join$saveAll(&quot;landsat&quot;)$apply(
+  primary = s2,
+  secondary = l8,
+  condition = ee$Filter$And(
+    ee$Filter$maxDifference(
+      difference = 1000 * 60 * 60 * 24, # One day in milliseconds
+      leftField = &quot;system:time_start&quot;,
+      rightField = &quot;system:time_start&quot;
+    ),
+    ee$Filter$intersects(
+      leftField = &quot;.geo&quot;,
+      rightField = &quot;.geo&quot;
+    )
+  )
+)
+print(joined$first()$getInfo())</code></pre>
+<p>Although you should try a join first (<code>Export</code> if needed), occasionally a <code>filter()</code> within a <code>map()</code> can also be effective, particularly for very large collections.</p>
+<pre class="r"><code>s2 &lt;- ee$ImageCollection(&quot;COPERNICUS/S2&quot;)$
+  filterBounds(ee$Geometry$Point(c(-2.0205, 48.647)))
+l8 &lt;- ee$ImageCollection(&quot;LANDSAT/LC08/C01/T1_SR&quot;)
+mappedFilter &lt;- s2$map(function(image) {
+  date &lt;- image$date()
+  landsat &lt;- l8$
+    filterBounds(image$geometry())$
+    filterDate(date$advance(-1, &quot;day&quot;), date$advance(1, &quot;day&quot;))
+    # Return the input image with matching scenes in a property.
+  image$set(
+    list(
+      landsat = landsat,
+      size = landsat$size()
+    )
+  )
+})$filter(ee$Filter$gt(&quot;size&quot;, 0))
+print(mappedFilter$first()$getInfo())</code></pre>
+</div>
+<div id="reduceregion-vs.-reduceregions-vs.-for-loop" class="section level2">
+<h2>20. <strong>reduceRegion() vs. reduceRegions()</strong> vs. for-loop</h2>
+<p>Calling <code>reduceRegions()</code> with a very large or complex
+<code>FeatureCollection</code> as input may result in the dreaded “Computed value
+is too large” error. One potential solution is to map <code>reduceRegion()</code>
+over the <code>FeatureCollection</code> instead. Another potential solution is to
+use a (gasp) for-loop. Although this is strongly discouraged in Earth
+Engine as described <a href="https://developers.google.com/earth-engine/getstarted#mapping-what-to-do-instead-of-a-for-loop">here</a>, <a href="https://developers.google.com/earth-engine/tutorial_js_03#for-loops">here</a> and <a href="https://developers.google.com/earth-engine/client_server#looping">here</a>, <code>reduceRegion()</code> can be implemented in a for-loop to perform large reductions.</p>
+<p>Suppose your objective is to obtain the mean of pixels (or any statistic) in each feature in a <code>FeatureCollection</code> for each image in an <code>ImageCollection</code>. The following example compares the three approaches previously described:</p>
+<pre class="r"><code># Table of countries.
+countriesTable &lt;- ee$FeatureCollection(&quot;USDOS/LSIB_SIMPLE/2017&quot;)
+# Time series of images.
+mod13a1 &lt;- ee$ImageCollection(&quot;MODIS/006/MOD13A1&quot;)
+# MODIS vegetation indices (always use the most recent version).
+band &lt;- &quot;NDVI&quot;
+imagery &lt;- mod13a1$select(band)
+# Option 1: reduceRegions()
+testTable &lt;- countriesTable$limit(1) # Do this outside map()s and loops.
+data &lt;- imagery$map(function(image) {
+  image$reduceRegions(
+    collection = testTable,
+    reducer = ee$Reducer$mean(),
+    scale = 500
+  )$map(function(f) {
+    f$set(
+      list(
+        time = image$date()$millis(),
+        date = image$date()$format()
+      )
+    )
+  })
+})$flatten()
+print(data$first()$getInfo())
+# Option 2: mapped reduceRegion()
+data &lt;- countriesTable$map(function(feature) {
+  imagery$map(
+    function(image) {
+      ee$Feature(
+        feature$geometry()$centroid(100),
+        image$reduceRegion(
+          reducer = ee$Reducer$mean(),
+          geometry = feature$geometry(),
+          scale = 500
+        )
+      )$set(
+        list(
+          time = image$date()$millis(),
+          date = image$date()$format()
+        )
+      )$copyProperties(feature)
+    }
+  )
+})$flatten()
+print(data$first()$getInfo())
+# Option 3: for-loop (WATCH OUT!)
+size &lt;- countriesTable$size()
+print(size$getInfo()) # 312
+countriesList &lt;- countriesTable$toList(1) # Adjust size.
+data &lt;- ee$FeatureCollection(list()) # Empty table.
+for (j in (seq_len(countriesList$length()$getInfo()) - 1)) {
+  feature &lt;- ee$Feature(countriesList$get(j))
+  # Convert ImageCollection &gt; FeatureCollection
+  fc &lt;- ee$FeatureCollection(
+    imagery$map(
+      function(image) {
+        ee$Feature(
+          feature$geometry()$centroid(100),
+          image$reduceRegion(
+            reducer = ee$Reducer$mean(),
+            geometry = feature$geometry(),
+            scale = 500
+          )
+        )$set(
+          list(
+            time = image$date()$millis(),
+            date = image$date()$format()
+          )
+        )$copyProperties(feature)
+      }
+    )
+  )
+  data &lt;- data$merge(fc)
+}
+print(data$first()$getInfo())</code></pre>
+<p>Note that the <code>first()</code> thing from each collection is printed, for debugging purposes. You should not expect that the complete result will be available interactively: you’ll need to <code>Export</code>. Also note that for-loops should be used with extreme caution and only as a last resort. Finally, the for-loop requires manually obtaining the size of the input collection and hardcoding that in the appropriate locations. If any of that sounds unclear to you, don’t use a for-loop.</p>
+</div>
+<div id="use-forward-differencing-for-neighbors-in-time" class="section level2">
+<h2>21. Use forward differencing for neighbors in time</h2>
+<p>Suppose you have a temporally sorted <code>ImageCollection</code> (i.e. a time series) and you want to compare each image to the previous (or next) image. Rather than use <code>iterate()</code> for this purpose, it may be more efficient to use an array-based forward differencing. The following example uses this method to de-duplicate the Sentinel-2 collection, where duplicates are defined as images with the same day of year:</p>
+<pre class="r"><code>sentinel2 &lt;- ee$ImageCollection(&quot;COPERNICUS/S2&quot;)
+sf &lt;- ee$Geometry$Point(c(-122.47555371521855, 37.76884708376152))
+s2 &lt;- sentinel2$
+  filterBounds(sf)$
+  filterDate(&quot;2018-01-01&quot;, &quot;2019-12-31&quot;)
+withDoys &lt;- s2$map(function(image) {
+  ndvi &lt;- image$normalizedDifference(c(&quot;B4&quot;, &quot;B8&quot;))$rename(&quot;ndvi&quot;)
+  date &lt;- image$date()
+  doy &lt;- date$getRelative(&quot;day&quot;, &quot;year&quot;)
+  time &lt;- image$metadata(&quot;system:time_start&quot;)
+  doyImage &lt;- ee$Image(doy)$
+    rename(&quot;doy&quot;)$
+    int()
+  
+  ndvi$
+    addBands(doyImage)$
+    addBands(time)$
+    clip(image$geometry()) # Appropriate use of clip.
+})
+array &lt;- withDoys$toArray()
+timeAxis &lt;- 0
+bandAxis &lt;- 1
+dedup &lt;- function(array) {
+  time &lt;- array$arraySlice(bandAxis, -1)
+  sorted &lt;- array$arraySort(time)
+  doy &lt;- sorted$arraySlice(bandAxis, -2, -1)
+  left &lt;- doy$arraySlice(timeAxis, 1)
+  right &lt;- doy$arraySlice(timeAxis, 0, -1)
+  mask &lt;- ee$Image(ee$Array(list(list(1))))$
+    arrayCat(left$neq(right), timeAxis)
+  array$arrayMask(mask)
+}
+deduped &lt;- dedup(array)
+# Inspect these outputs to confirm that duplicates have been removed.
+print(array$reduceRegion(&quot;first&quot;, sf, 10)$getInfo())
+print(deduped$reduceRegion(&quot;first&quot;, sf, 10)$getInfo())</code></pre>
+</div>

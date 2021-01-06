@@ -1,0 +1,146 @@
+---
+author: Cesar Aybar
+categories:
+- introduction
+date: "2020-01-06"
+tags:
+- map
+- eedate_to_rdate
+- rdate_to_eedate
+title: basic rgee - Consideration
+type: post
+url: /intro_02/
+w3codecolor: true
+thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700-4f86-11eb-8750-5a5920a87d18.png
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/clipboard/clipboard.min.js"></script>
+<link href="/rmarkdown-libs/primer-tooltips/build.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/klippy/css/klippy.min.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
+
+
+<p>Thanks to <strong>reticulate</strong> embedding a Python session within an R session, <strong>rgee</strong> and the <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python
+API</a> <strong>share the same modules, classes, functions, and methods</strong>. In other words, the logic of the syntax is the same and just as fast (just change <strong>.</strong> by a <strong>$</strong>). Notwithstanding, differences in the language design of R and Python might cause some problems in specific scenarios. We identify <strong>three</strong> bug-potential cases. Each of them are explained in-depth below.</p>
+<script>
+  addClassKlippyToPreCode();
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
+<div id="the-map-message-error" class="section level2">
+<h2>1. The <strong>map</strong> message error:</h2>
+<p>This issue happens when the <strong>map</strong> method is used
+under the next two cases: (1) users employing a reticulate version
+lower than &lt; 1.14 (please update it!); and (2) if you are leading
+with <strong>ee$List</strong> objects. For instance:</p>
+<pre class="r"><code>library(rgee)
+ee$Initialize()
+mylist = ee$List$sequence(10)
+mylist$map(function(x) ee$Number(x)$add(1))
+#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): RuntimeError: Evaluation error: argument &quot;x&quot; is missing, with no default.
+#&gt; 
+#&gt; Detailed traceback: 
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/apifunction.py&quot;, line 205, in &lt;lambda&gt;
+#&gt;     return lambda *args, **kwargs: func.call(*args, **kwargs)  # pylint: disable=unnecessary-lambda
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/function.py&quot;, line 67, in call
+#&gt;     return self.apply(self.nameArgs(args, kwargs))
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/function.py&quot;, line 80, in apply
+#&gt;     result = computedobject.ComputedObject(self, self.promoteArgs(named_args))
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/function.py&quot;, line 107, in promoteArgs
+#&gt;     promoted_args[name] = Function._promoter(args[name], spec[&#39;type&#39;])
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/__init__.py&quot;, line 242, in _Promote
+#&gt;     return CustomFunction.create(arg, &#39;Object&#39;, [&#39;Object&#39;] * args_count)
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/customfunction.py&quot;, line 121, in create
+#&gt;     return CustomFunction(signature, func)
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/customfunction.py&quot;, line 47, in __init__
+#&gt;     self._body = body(*variables)
+#&gt;   File &quot;/home/aybarpc01/R/x86_64-pc-linux-gnu-library/3.6/reticulate/python/rpytools/call.py&quot;, line 21, in python_function
+#&gt;     raise RuntimeError(res[kErrorKey])</code></pre>
+<p>The code before is perfectly valid but <code>rgee</code> will produce an error.
+This problem should be easily solved by adding the function <strong>ee_utils_pyfunc</strong>.
+It will permit to wrap R functions before to send it to <code>reticulate</code>. Let’s see:</p>
+<pre class="r"><code>library(rgee)
+ee$Initialize()
+mylist = ee$List$sequence(0,10)
+mynewlist = mylist$map(
+  ee_utils_pyfunc(
+    function(x) ee$Number(x)$add(1)   
+  )
+)
+mynewlist$getInfo()
+#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11</code></pre>
+<div id="do-not-forget-the-l" class="section level3">
+<h3>2. Do not forget the <strong>L</strong></h3>
+<p>By default, when you define a number in R it will produce a <strong>double
+precision</strong> value. This does not happen in Python because, by default it
+will create a <strong>int</strong> value.</p>
+<p><strong>Python</strong></p>
+<pre class="python"><code>type(1)
+#&gt; &lt;class &#39;int&#39;&gt;</code></pre>
+<p><strong>R</strong></p>
+<pre class="r"><code>class(1)
+#&gt; [1] &quot;numeric&quot;</code></pre>
+<p>But why does this matter? Let’s explain it with an example:</p>
+<p><strong>Python</strong></p>
+<pre class="python"><code>ee.Initialize()
+and_bitwise = ee.Number(32).bitwiseAnd(100)
+and_bitwise.getInfo()
+#&gt; 32</code></pre>
+<p><strong>R</strong></p>
+<pre class="r"><code>and_bitwise = ee$Number(32)$bitwiseAnd(100) #caution: silent error
+and_bitwise$getInfo()
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;/home/aybarpc01/.local/lib/python3.7/site-packages/ee/computedobject.py&quot;, line 95, in getInfo
+    return data.computeValue(self)
+  File &quot;/home/aybarpc01/.local/lib/python3.7/site-packages/ee/data.py&quot;, line 490, in computeValue
+    return send_(&#39;/value&#39;, ({&#39;json&#39;: obj.serialize(), &#39;json_format&#39;: &#39;v2&#39;}))
+  File &quot;/home/aybarpc01/.local/lib/python3.7/site-packages/ee/data.py&quot;, line 1186, in send_
+    raise ee_exception.EEException(json_content[&#39;error&#39;][&#39;message&#39;])
+ee.ee_exception.EEException: Number.bitwiseAnd: Bitwise operands must be integer only.</code></pre>
+<p>Users need to take into consideration that most of the arguments of the
+Earth Engine methods are strict to admit only <strong>integer values</strong>. The
+creation of integers in R is quite simple, you just need to add the
+letter <strong>L</strong> to the end of the specific number or employ the
+function <code>as.integer</code>. The <strong>correct code</strong> in R would be:</p>
+<pre class="r"><code>and_bitwise = ee$Number(32L)$bitwiseAnd(100L)
+and_bitwise$getInfo()
+#&gt; [1] 32</code></pre>
+</div>
+<div id="be-careful-with-eedate" class="section level3">
+<h3>3. Be careful with <strong>ee$Date</strong></h3>
+<p>This problem also appears due to differences between the design of R and
+Python as programming languages. Currently, R only support integer data
+type of 32 bits. Such integers can only count up to about 2 billion. Unfortunately,
+this range is extremely insufficient to deal with <a href="https://developers.google.com/earth-engine/glossary">Google Earth
+Engine timestamp</a>
+which is saved in milliseconds since the <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX epoch</a>.</p>
+<p><strong>Python</strong></p>
+<pre class="python"><code>my_date = ee.Date(&#39;1990-01-01&#39;)
+my_date.getInfo()
+#&gt; {&#39;type&#39;: &#39;Date&#39;, &#39;value&#39;: 631152000000} # greater than 2 billion</code></pre>
+<p><strong>R</strong></p>
+<pre class="r"><code>my_date &lt;- ee$Date(&#39;1990-01-01&#39;)
+my_date$getInfo()
+#&gt; $type
+#&gt; [1] &quot;Date&quot;
+#&gt; 
+#&gt; $value
+#&gt; [1] -208192512</code></pre>
+<p>The problems with <code>ee$Date</code> just appear in the last mile (Python to R or
+vice-versa, <code>reticulate</code>), and it should not be a trouble if treated
+with care. <code>rgee</code> implement two functions to deal with Earth Engine
+dates: <code>eedate_to_rdate</code> and <code>rdate_to_eedate</code>.</p>
+<pre class="r"><code># Era5 dataset
+era_img &lt;- ee$ImageCollection(&quot;ECMWF/ERA5/DAILY&quot;)$
+  filterDate(&quot;2019-01-01&quot;, &quot;2019-12-31&quot;)$
+  first()
+# Extracting init date
+ee_date &lt;- era_img$get(&#39;system:time_start&#39;)
+ee_date$getInfo() # Silent error
+#&gt; [1] 112573440
+eedate_to_rdate(ee_date = ee_date, timestamp = TRUE)
+#&gt; [1] 1.546301e+12</code></pre>
+</div>
+</div>

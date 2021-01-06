@@ -6,7 +6,7 @@ date: "2020-01-05"
 tags:
 - ee_install
 - ee_initialize
-title: Introduction to Google Earth Engine with R - I
+title: basic rgee - First steps
 type: post
 url: /intro_01/
 w3codecolor: true
@@ -20,11 +20,6 @@ thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700
 <script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
 
 
-<script>
-  addClassKlippyToPreCode();
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
-</script>
 <div id="what-is-google-earth-engine" class="section level2">
 <h2>1. What is Google Earth Engine ?</h2>
 <p><strong>Google Earth Engine</strong> is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:</p>
@@ -36,6 +31,11 @@ thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700
 <li><strong>R client library</strong></li>
 </ul>
 <p>This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development <a href="https://github.com/MVanDenburg92/RGEE_Shiny">web applications</a>.</p>
+<script>
+  addClassKlippyToPreCode();
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
 </div>
 <div id="the-purpose-of-earth-engine-is-to" class="section level2">
 <h2>2. The purpose of Earth Engine is to:</h2>
@@ -147,7 +147,7 @@ interactive menu to install <a href="https://docs.conda.io/en/latest/miniconda.h
 <li><p>Remove the previous Python environment defined with the same name if it exists.</p></li>
 <li><p>Create a new Python environment.</p></li>
 <li><p>Set the environmental variable EARTHENGINE_PYTHON and EARTHENGINE_ENV. These variables
-will be used to define the reticulate environmental variable “RETICULATE_PYTHON” when
+will be used to define the reticulate environmental variable <a href="https://rstudio.github.io/reticulate/articles/versions.html#providing-hints">RETICULATE_PYTHON</a> when
 rgee is loaded.</p></li>
 <li><p>Install rgee Python dependencies: <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python API</a> and
 <a href="https://pypi.org/project/numpy/">Numpy</a>.</p></li>
