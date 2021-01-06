@@ -6,23 +6,12 @@ date: "2020-01-05"
 tags:
 - ee_install
 - ee_initialize
-title: Introduction to Google Earth Engine with R - I
+title: basic rgee - First steps
 type: post
 url: /intro_01/
 w3codecolor: true
 thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700-4f86-11eb-8750-5a5920a87d18.png
 ---
-
-```{r klippy, echo=FALSE, include=TRUE}
-klippy::klippy(position = c('top', 'right'), tooltip_message = 'Click to copy', tooltip_success = 'Done', all_precode = TRUE)
-```
-
-
-```{r, setup, include=FALSE}
-knitr::opts_chunk$set(
-  comment = '', fig.width = 6, fig.height = 6
-)
-```
 
 ## 1. What is Google Earth Engine ? 
 
@@ -35,6 +24,19 @@ knitr::opts_chunk$set(
  * **R client library**   
 
 This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development [web applications](https://github.com/MVanDenburg92/RGEE_Shiny). 
+
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'), tooltip_message = 'Click to copy', tooltip_success = 'Done', all_precode = TRUE)
+```
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = '', fig.width = 6, fig.height = 6
+)
+```
+
 
 ## 2. The purpose of Earth Engine is to:
 
@@ -114,7 +116,7 @@ This function will realize the following six tasks:
   3. Create a new Python environment.
 
   4. Set the environmental variable EARTHENGINE_PYTHON and EARTHENGINE_ENV. These variables
-  will be used to define the reticulate environmental variable "RETICULATE_PYTHON" when 
+  will be used to define the reticulate environmental variable [RETICULATE_PYTHON](https://rstudio.github.io/reticulate/articles/versions.html#providing-hints) when 
   rgee is loaded. 
   
   5. Install rgee Python dependencies: [Earth Engine Python API](https://pypi.org/project/earthengine-api/) and

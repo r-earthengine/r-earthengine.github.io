@@ -16,25 +16,23 @@
     
     
 
-<title>basic rgee - First steps • rgee Theme</title>
+<title>basic rgee - Consideration • rgee Theme</title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="basic rgee - First steps"/>
-<meta name="twitter:description" content="1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
- Explorer Code Editor Javascript client library Python client library R client library  This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development web applications."/>
+<meta name="twitter:title" content="basic rgee - Consideration"/>
+<meta name="twitter:description" content="Thanks to reticulate embedding a Python session within an R session, rgee and the Earth Engine Python API share the same modules, classes, functions, and methods. In other words, the logic of the syntax is the same and just as fast (just change . by a $). Notwithstanding, differences in the language design of R and Python might cause some problems in specific scenarios. We identify three bug-potential cases."/>
 
-<meta property="og:title" content="basic rgee - First steps" />
-<meta property="og:description" content="1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
- Explorer Code Editor Javascript client library Python client library R client library  This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development web applications." />
+<meta property="og:title" content="basic rgee - Consideration" />
+<meta property="og:description" content="Thanks to reticulate embedding a Python session within an R session, rgee and the Earth Engine Python API share the same modules, classes, functions, and methods. In other words, the logic of the syntax is the same and just as fast (just change . by a $). Notwithstanding, differences in the language design of R and Python might cause some problems in specific scenarios. We identify three bug-potential cases." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://r-earthengine.github.io/intro_01/" />
-<meta property="article:published_time" content="2020-01-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-01-05T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
+<meta property="og:url" content="https://r-earthengine.github.io/intro_02/" />
+<meta property="article:published_time" content="2020-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-06T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
 
 
 
-<link rel="canonical" href="https://r-earthengine.github.io/intro_01/" />
+<link rel="canonical" href="https://r-earthengine.github.io/intro_02/" />
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -230,13 +228,13 @@ function displaymenu() {
   <div class="w3-content w3-card-4" >
     
     <header class="w3-container w3-center w3-padding-32">
-      <h1>basic rgee - First steps</h1>
+      <h1>basic rgee - Consideration</h1>
 
       <div >
-        <p> 2020-01-05 
+        <p> 2020-01-06 
           
-             <code> 941 words  </code>
-             <code> 5 mins read </code>
+             <code> 674 words  </code>
+             <code> 4 mins read </code>
           
         </p>
         <div >
@@ -260,8 +258,6 @@ function displaymenu() {
 
         
           
-          
-          
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 <script src="/rmarkdown-libs/clipboard/clipboard.min.js"></script>
 <link href="/rmarkdown-libs/primer-tooltips/build.css" rel="stylesheet" />
@@ -269,204 +265,128 @@ function displaymenu() {
 <script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
 
 
-<div id="what-is-google-earth-engine" class="section level2">
-<h2>1. What is Google Earth Engine ?</h2>
-<p><strong>Google Earth Engine</strong> is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:</p>
-<ul>
-<li><strong>Explorer</strong></li>
-<li><strong>Code Editor</strong></li>
-<li><strong>Javascript client library</strong></li>
-<li><strong>Python client library</strong></li>
-<li><strong>R client library</strong></li>
-</ul>
-<p>This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development <a href="https://github.com/MVanDenburg92/RGEE_Shiny">web applications</a>.</p>
+<p>Thanks to <strong>reticulate</strong> embedding a Python session within an R session, <strong>rgee</strong> and the <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python
+API</a> <strong>share the same modules, classes, functions, and methods</strong>. In other words, the logic of the syntax is the same and just as fast (just change <strong>.</strong> by a <strong>$</strong>). Notwithstanding, differences in the language design of R and Python might cause some problems in specific scenarios. We identify <strong>three</strong> bug-potential cases. Each of them are explained in-depth below.</p>
 <script>
   addClassKlippyToPreCode();
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
 </script>
-</div>
-<div id="the-purpose-of-earth-engine-is-to" class="section level2">
-<h2>2. The purpose of Earth Engine is to:</h2>
-<ul>
-<li><p>Perform highly-interactive algorithm development at global scale</p></li>
-<li><p>Push the edge of the envelope for big data in remote sensing</p></li>
-<li><p>Enable high-impact, data-driven science</p></li>
-<li><p>Make substantive progress on global challenges that involve large geospatial datasets</p></li>
-</ul>
-</div>
-<div id="components" class="section level2">
-<h2>3. Components:</h2>
-<p>The main components of Earth Engine are:</p>
-<p><strong>Datasets</strong>: A petabyte-scale archive of publicly available remotely sensed imagery and other data. Explore the data catalog.</p>
-<p><strong>Compute power</strong>: Google’s computational infrastructure optimized for parallel processing of geospatial data.</p>
-<p><strong>WEB REST API/Client libraries</strong>: For making requests to the Earth Engine servers.</p>
-<p><strong>Code Editor</strong>: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the Javascript API.</p>
-</div>
-<div id="meet-earth-engine" class="section level2">
-<h2>4. Meet Earth Engine</h2>
-<p>Users must considerate that the Earth Engine API and advanced Earth Engine functionality <strong>are experimental and subject to change</strong>. Access is limited and requires requesting access via the <a href="https://earthengine.google.com/signup/">form</a>. See <a href="https://earthengine.google.com/">Earth Engine official website</a> to obtain more information.</p>
-<iframe src="https://www.youtube.com/embed/gKGOeTFHnKY" styles="max-width: 70%;height: 500px;" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="why-rgee-instead-of-code-editor-javascript" class="section level2">
-<h2>5. Why rgee instead of code editor (Javascript)?</h2>
-<p>A short comparison based on <a href="https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205">Tyler Erickson presentation</a>.</p>
-<center>
-<table style="border-collapse:collapse;border-color:#ccc;border-spacing:0;border:none" class="tg">
-<thead>
-<tr>
-<th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">
-Code Editor
-</th>
-<th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">
-R
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-Easy to get started
-</td>
-<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-Easy to share code between scripts.
-</td>
-</tr>
-<tr>
-<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-Trivial to share scripts
-</td>
-<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-Easier transition to a web application (<span style="font-weight:bold">Shiny</span>).
-</td>
-</tr>
-<tr>
-<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-Built in authentication
-</td>
-<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-An I/O API more friendly with R users.
-</td>
-</tr>
-<tr>
-<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-<span style="font-weight:bold;color:#FE0000">Limited input/output functionality</span>
-</td>
-<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-Many, many plotting options
-</td>
-</tr>
-<tr>
-<td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-<span style="font-weight:bold;color:#FE0000">Integration with other JS libraries is not possible</span>
-</td>
-<td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">
-<span style="font-weight:bold;color:#FE0000">Some assembly (&amp; maintenance) required!.</span>
-</td>
-</tr>
-</tbody>
-</table>
-</center>
-</div>
-<div id="installation" class="section level2">
-<h2>6. Installation</h2>
-<p><strong>rgee</strong> only depends on <a href="https://cran.r-project.org/web/packages/reticulate/index.html">reticulate</a> and <a href="https://cran.r-project.org/web/packages/processx/index.html">processx</a>. Therefore, users should ensure
-that both packages can be installed on their system. To install <strong>rgee</strong> run as follow:</p>
-<pre class="r"><code>remotes::install_github(&quot;r-spatial/rgee&quot;)</code></pre>
-<p><strong>rgee</strong> has two types of dependencies: <span style="color:#b52b09"><strong>strict dependencies</strong></span> that must be
-satisfied before the <strong>rgee</strong> installation and the <span style="color:#857e04"><b>credentials dependencies</b></span> that
-unlock all <strong>rgee</strong> I/0 functionality.</p>
-<p>If the strict dependencies are not fulfilled <strong>rgee just will not work</strong>. The dependencies that comprised this group are:</p>
-<ul>
-<li><p><span style="color:#b52b09"><b> Google account with Earth Engine
-activated </b></span></p></li>
-<li><p><span style="color:#b52b09"><b> Python &gt;= v3.5 </b></span></p></li>
-<li><p><span style="color:#b52b09"><b> EarthEngine Python API (Python package) </b></span></p></li>
-</ul>
-<p>The activation of an <strong>Earth Engine account</strong> depends on each user, check
-the official website of <a href="https://earthengine.google.com/">Google Earth Engine</a> for more details. If you do not count with a Python environment or a version of the EarthEngine Python API, we strongly recommend you run:</p>
+<div id="the-map-message-error" class="section level2">
+<h2>1. The <strong>map</strong> message error:</h2>
+<p>This issue happens when the <strong>map</strong> method is used
+under the next two cases: (1) users employing a reticulate version
+lower than &lt; 1.14 (please update it!); and (2) if you are leading
+with <strong>ee$List</strong> objects. For instance:</p>
 <pre class="r"><code>library(rgee)
-ee_install(py_env = &quot;rgee&quot;) # It is just necessary once!</code></pre>
-<p>This function will realize the following six tasks:</p>
-<ol style="list-style-type: decimal">
-<li><p>If you do not count with a Python environment, it will display an
-interactive menu to install <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>
-(a free minimal installer for conda).</p></li>
-<li><p>Remove the previous Python environment defined with the same name if it exists.</p></li>
-<li><p>Create a new Python environment.</p></li>
-<li><p>Set the environmental variable EARTHENGINE_PYTHON and EARTHENGINE_ENV. These variables
-will be used to define the reticulate environmental variable <a href="https://rstudio.github.io/reticulate/articles/versions.html#providing-hints">RETICULATE_PYTHON</a> when
-rgee is loaded.</p></li>
-<li><p>Install rgee Python dependencies: <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python API</a> and
-<a href="https://pypi.org/project/numpy/">Numpy</a>.</p></li>
-<li><p>Interactive menu to confirm if restart the R session to see changes.</p></li>
-</ol>
-<p><strong>However, the use of rgee::ee_install() is not mandatory. You can count on with your own custom installation. This would be also allowed.</strong> If you are a Rstudio v.1.4 &gt; user, this <a href="https://github.com/r-spatial/rgee/tree/help/rstudio"><strong>tutorial</strong></a> will help you to properly set a Python Environment with your R session without <strong>rgee::ee_install()</strong>. Take into account that the Python Environment you set must have installed the <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python API</a> and <a href="https://pypi.org/project/numpy/">Numpy</a>.</p>
-<p>By the other hand, the <span style="color:#857e04"><b>credentials dependencies</b></span>
-are only needed to move data from Google Drive and Google Cloud Storage to your local environment.
-These dependencies are not mandatory. However, they will help you to create a seamless connection between
-R and Earth Engine. The dependencies that comprised this group are shown below:</p>
-<ul>
-<li><p><span style="color:#857e04"><strong>Google Cloud Storage
-credential</strong></span></p></li>
-<li><p><span style="color:#857e04"><strong>Google Drive credential</strong></span></p></li>
-</ul>
-<p>See the next section to learn how to correctly set both credentials.</p>
-</div>
-<div id="authentication" class="section level2">
-<h2>7. Authentication</h2>
-<p>As we have seen previously, <strong>rgee</strong> deal with three different Google API’s:</p>
-<ul>
-<li><p>Google Earth Engine</p></li>
-<li><p>Google Drive</p></li>
-<li><p>Google Cloud Storage</p></li>
-</ul>
-<p>To authenticate/initialize either Google Drive or Google Cloud Storage, you just need to run as follow:</p>
+ee$Initialize()
+mylist = ee$List$sequence(10)
+mylist$map(function(x) ee$Number(x)$add(1))
+#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): RuntimeError: Evaluation error: argument &quot;x&quot; is missing, with no default.
+#&gt; 
+#&gt; Detailed traceback: 
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/apifunction.py&quot;, line 205, in &lt;lambda&gt;
+#&gt;     return lambda *args, **kwargs: func.call(*args, **kwargs)  # pylint: disable=unnecessary-lambda
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/function.py&quot;, line 67, in call
+#&gt;     return self.apply(self.nameArgs(args, kwargs))
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/function.py&quot;, line 80, in apply
+#&gt;     result = computedobject.ComputedObject(self, self.promoteArgs(named_args))
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/function.py&quot;, line 107, in promoteArgs
+#&gt;     promoted_args[name] = Function._promoter(args[name], spec[&#39;type&#39;])
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/__init__.py&quot;, line 242, in _Promote
+#&gt;     return CustomFunction.create(arg, &#39;Object&#39;, [&#39;Object&#39;] * args_count)
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/customfunction.py&quot;, line 121, in create
+#&gt;     return CustomFunction(signature, func)
+#&gt;   File &quot;/home/aybarpc01/.virtualenvs/r-reticulate/lib/python3.7/site-packages/ee/customfunction.py&quot;, line 47, in __init__
+#&gt;     self._body = body(*variables)
+#&gt;   File &quot;/home/aybarpc01/R/x86_64-pc-linux-gnu-library/3.6/reticulate/python/rpytools/call.py&quot;, line 21, in python_function
+#&gt;     raise RuntimeError(res[kErrorKey])</code></pre>
+<p>The code before is perfectly valid but <code>rgee</code> will produce an error.
+This problem should be easily solved by adding the function <strong>ee_utils_pyfunc</strong>.
+It will permit to wrap R functions before to send it to <code>reticulate</code>. Let’s see:</p>
 <pre class="r"><code>library(rgee)
-#ee_reattach() # reattach ee as a reserve word
-
-# Initialize just Earth Engine
-ee_Initialize() 
-ee_Initialize(email = &#39;csaybar@gmail.com&#39;) # Use the argument email is not mandatory
-
-# Initialize Earth Engine and GD
-ee_Initialize(email = &#39;csaybar@gmail.com&#39;, drive = TRUE)
-
-# Initialize Earth Engine and GCS
-ee_Initialize(email = &#39;csaybar@gmail.com&#39;, gcs = TRUE)
-
-# Initialize Earth Engine, GD and GCS
-ee_Initialize(email = &#39;csaybar@gmail.com&#39;, drive = TRUE, gcs = TRUE)</code></pre>
-<p>If the Google account is verified and the permission is granted, you
-will be directed to an authentication token. Copy this token and paste
-it in the emerging GUI. Unlike Earth Engine and Google Drive, Google Cloud
-Storage need to set up its credential manually (<a href="http://code.markedmondson.me/googleCloudStorageR/articles/googleCloudStorageR.html">link1</a> and <a href="https://github.com/r-spatial/rgee/tree/help/gcs">link2</a>). In all cases, the users credentials always will be stored in:</p>
-<pre class="r"><code>ee_get_earthengine_path()</code></pre>
-<p>Remember you only have to authorize once, for next sessions it will not be necessary.</p>
+ee$Initialize()
+mylist = ee$List$sequence(0,10)
+mynewlist = mylist$map(
+  ee_utils_pyfunc(
+    function(x) ee$Number(x)$add(1)   
+  )
+)
+mynewlist$getInfo()
+#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11</code></pre>
+<div id="do-not-forget-the-l" class="section level3">
+<h3>2. Do not forget the <strong>L</strong></h3>
+<p>By default, when you define a number in R it will produce a <strong>double
+precision</strong> value. This does not happen in Python because, by default it
+will create a <strong>int</strong> value.</p>
+<p><strong>Python</strong></p>
+<pre class="python"><code>type(1)
+#&gt; &lt;class &#39;int&#39;&gt;</code></pre>
+<p><strong>R</strong></p>
+<pre class="r"><code>class(1)
+#&gt; [1] &quot;numeric&quot;</code></pre>
+<p>But why does this matter? Let’s explain it with an example:</p>
+<p><strong>Python</strong></p>
+<pre class="python"><code>ee.Initialize()
+and_bitwise = ee.Number(32).bitwiseAnd(100)
+and_bitwise.getInfo()
+#&gt; 32</code></pre>
+<p><strong>R</strong></p>
+<pre class="r"><code>and_bitwise = ee$Number(32)$bitwiseAnd(100) #caution: silent error
+and_bitwise$getInfo()
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;/home/aybarpc01/.local/lib/python3.7/site-packages/ee/computedobject.py&quot;, line 95, in getInfo
+    return data.computeValue(self)
+  File &quot;/home/aybarpc01/.local/lib/python3.7/site-packages/ee/data.py&quot;, line 490, in computeValue
+    return send_(&#39;/value&#39;, ({&#39;json&#39;: obj.serialize(), &#39;json_format&#39;: &#39;v2&#39;}))
+  File &quot;/home/aybarpc01/.local/lib/python3.7/site-packages/ee/data.py&quot;, line 1186, in send_
+    raise ee_exception.EEException(json_content[&#39;error&#39;][&#39;message&#39;])
+ee.ee_exception.EEException: Number.bitwiseAnd: Bitwise operands must be integer only.</code></pre>
+<p>Users need to take into consideration that most of the arguments of the
+Earth Engine methods are strict to admit only <strong>integer values</strong>. The
+creation of integers in R is quite simple, you just need to add the
+letter <strong>L</strong> to the end of the specific number or employ the
+function <code>as.integer</code>. The <strong>correct code</strong> in R would be:</p>
+<pre class="r"><code>and_bitwise = ee$Number(32L)$bitwiseAnd(100L)
+and_bitwise$getInfo()
+#&gt; [1] 32</code></pre>
 </div>
-<div id="hello-world" class="section level2">
-<h2>8. Hello World</h2>
-<p>we know that installing <strong>rgee</strong> can be frustrating sometimes :( , so, congratulations to go so far :D :D. In this small example will show you how to display SRTM elevation values worldwide!.</p>
-<pre class="r"><code>library(rgee)
-ee_Initialize()
-srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
-<p><strong>Define visualization parameters</strong></p>
-<pre class="r"><code>viz &lt;- list(
-  max = 4000,
-  min = 0,
-  palette = c(&quot;#000000&quot;,&quot;#5AAD5A&quot;,&quot;#A9AD84&quot;,&quot;#FFFFFF&quot;)
-)</code></pre>
-<p><strong>Use Map$addLayer to visualize the map interactively</strong></p>
-<pre class="r"><code>Map$addLayer(
-  eeObject = srtm,
-  visParams =  viz,
-  name = &#39;SRTM&#39;,
-  legend = TRUE
-)</code></pre>
-<center>
-<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/16768318/103684232-8bd56a80-4f8b-11eb-8bbb-fac3e1c2aada.png" width="90%">
-</center>
+<div id="be-careful-with-eedate" class="section level3">
+<h3>3. Be careful with <strong>ee$Date</strong></h3>
+<p>This problem also appears due to differences between the design of R and
+Python as programming languages. Currently, R only support integer data
+type of 32 bits. Such integers can only count up to about 2 billion. Unfortunately,
+this range is extremely insufficient to deal with <a href="https://developers.google.com/earth-engine/glossary">Google Earth
+Engine timestamp</a>
+which is saved in milliseconds since the <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX epoch</a>.</p>
+<p><strong>Python</strong></p>
+<pre class="python"><code>my_date = ee.Date(&#39;1990-01-01&#39;)
+my_date.getInfo()
+#&gt; {&#39;type&#39;: &#39;Date&#39;, &#39;value&#39;: 631152000000} # greater than 2 billion</code></pre>
+<p><strong>R</strong></p>
+<pre class="r"><code>my_date &lt;- ee$Date(&#39;1990-01-01&#39;)
+my_date$getInfo()
+#&gt; $type
+#&gt; [1] &quot;Date&quot;
+#&gt; 
+#&gt; $value
+#&gt; [1] -208192512</code></pre>
+<p>The problems with <code>ee$Date</code> just appear in the last mile (Python to R or
+vice-versa, <code>reticulate</code>), and it should not be a trouble if treated
+with care. <code>rgee</code> implement two functions to deal with Earth Engine
+dates: <code>eedate_to_rdate</code> and <code>rdate_to_eedate</code>.</p>
+<pre class="r"><code># Era5 dataset
+era_img &lt;- ee$ImageCollection(&quot;ECMWF/ERA5/DAILY&quot;)$
+  filterDate(&quot;2019-01-01&quot;, &quot;2019-12-31&quot;)$
+  first()
+# Extracting init date
+ee_date &lt;- era_img$get(&#39;system:time_start&#39;)
+ee_date$getInfo() # Silent error
+#&gt; [1] 112573440
+eedate_to_rdate(ee_date = ee_date, timestamp = TRUE)
+#&gt; [1] 1.546301e+12</code></pre>
+</div>
 </div>
 
                  
@@ -484,9 +404,11 @@ srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
         	<hr class = "tag">
         Tags: 
           
-          <a class="w3-btn w3-small w3-round w3-green" href="/tags/ee_install/">ee_install</a>
+          <a class="w3-btn w3-small w3-round w3-green" href="/tags/map/">map</a>
           
-          <a class="w3-btn w3-small w3-round w3-green" href="/tags/ee_initialize/">ee_initialize</a>
+          <a class="w3-btn w3-small w3-round w3-green" href="/tags/eedate_to_rdate/">eedate_to_rdate</a>
+          
+          <a class="w3-btn w3-small w3-round w3-green" href="/tags/rdate_to_eedate/">rdate_to_eedate</a>
           
           <hr class = "tag">
        
@@ -528,10 +450,13 @@ srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
     <div class="w3-content" > 
       <div class="w3-bar w3-section">
 	     
-	      <a  href="https://r-earthengine.github.io/intro_02/" class="w3-btn w3-text-indigo w3-hover-green">
-	          &#10094; basic rgee - Consideration
+	      <a  href="https://r-earthengine.github.io/intro_03/" class="w3-btn w3-text-indigo w3-hover-green">
+	          &#10094; basic rgee - Best practices
 	      </a>
 	    
+	      <a class="w3-btn w3-right w3-text-indigo w3-hover-green" href="https://r-earthengine.github.io/intro_01/">
+	       basic rgee - First steps &#10095;
+	      </a>
   	  </div>
     </div>
 	
