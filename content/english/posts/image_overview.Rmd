@@ -1,5 +1,5 @@
 ---
-title: "Imagen Overview"
+title: "Image - Image Overview"
 author: "Fernando Prudencio"
 date: '2020-01-06'
 output:
@@ -30,8 +30,6 @@ knitr::opts_chunk$set(
   comment = '', fig.width = 6, fig.height = 6
 )
 ```
-
-## Image Overview 
 
 **Table of contents**
 
