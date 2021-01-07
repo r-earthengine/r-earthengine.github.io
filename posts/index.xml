@@ -39,10 +39,10 @@ This doc describes coding practices that are intended to maximize the chance of 
     
     <item>
       <title>Imagen Overview</title>
-      <link>https://r-earthengine.github.io/intro_01/</link>
+      <link>https://r-earthengine.github.io/intro_04/</link>
       <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://r-earthengine.github.io/intro_01/</guid>
+      <guid>https://r-earthengine.github.io/intro_04/</guid>
       <description>addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
  Explorer Code Editor Javascript client library Python client library R client library  This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development web applications.</description>
     </item>

@@ -16,25 +16,25 @@
     
     
 
-<title>basic rgee - First steps • rgee Theme</title>
+<title>Imagen Overview • rgee Theme</title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="basic rgee - First steps"/>
-<meta name="twitter:description" content="1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
+<meta name="twitter:title" content="Imagen Overview"/>
+<meta name="twitter:description" content="addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
  Explorer Code Editor Javascript client library Python client library R client library  This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development web applications."/>
 
-<meta property="og:title" content="basic rgee - First steps" />
-<meta property="og:description" content="1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
+<meta property="og:title" content="Imagen Overview" />
+<meta property="og:description" content="addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
  Explorer Code Editor Javascript client library Python client library R client library  This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development web applications." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://r-earthengine.github.io/intro_01/" />
+<meta property="og:url" content="https://r-earthengine.github.io/intro_04/" />
 <meta property="article:published_time" content="2020-01-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-01-05T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
 
 
 
-<link rel="canonical" href="https://r-earthengine.github.io/intro_01/" />
+<link rel="canonical" href="https://r-earthengine.github.io/intro_04/" />
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -230,7 +230,7 @@ function displaymenu() {
   <div class="w3-content w3-card-4" >
     
     <header class="w3-container w3-center w3-padding-32">
-      <h1>basic rgee - First steps</h1>
+      <h1>Imagen Overview</h1>
 
       <div >
         <p> 2020-01-05 
@@ -269,6 +269,11 @@ function displaymenu() {
 <script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
 
 
+<script>
+  addClassKlippyToPreCode();
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
 <div id="what-is-google-earth-engine" class="section level2">
 <h2>1. What is Google Earth Engine ?</h2>
 <p><strong>Google Earth Engine</strong> is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:</p>
@@ -280,11 +285,6 @@ function displaymenu() {
 <li><strong>R client library</strong></li>
 </ul>
 <p>This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development <a href="https://github.com/MVanDenburg92/RGEE_Shiny">web applications</a>.</p>
-<script>
-  addClassKlippyToPreCode();
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
-</script>
 </div>
 <div id="the-purpose-of-earth-engine-is-to" class="section level2">
 <h2>2. The purpose of Earth Engine is to:</h2>
@@ -396,7 +396,7 @@ interactive menu to install <a href="https://docs.conda.io/en/latest/miniconda.h
 <li><p>Remove the previous Python environment defined with the same name if it exists.</p></li>
 <li><p>Create a new Python environment.</p></li>
 <li><p>Set the environmental variable EARTHENGINE_PYTHON and EARTHENGINE_ENV. These variables
-will be used to define the reticulate environmental variable <a href="https://rstudio.github.io/reticulate/articles/versions.html#providing-hints">RETICULATE_PYTHON</a> when
+will be used to define the reticulate environmental variable “RETICULATE_PYTHON” when
 rgee is loaded.</p></li>
 <li><p>Install rgee Python dependencies: <a href="https://pypi.org/project/earthengine-api/">Earth Engine Python API</a> and
 <a href="https://pypi.org/project/numpy/">Numpy</a>.</p></li>
@@ -427,7 +427,7 @@ credential</strong></span></p></li>
 #ee_reattach() # reattach ee as a reserve word
 
 # Initialize just Earth Engine
-ee_Initialize() 
+ee_Initialize()
 ee_Initialize(email = &#39;csaybar@gmail.com&#39;) # Use the argument email is not mandatory
 
 # Initialize Earth Engine and GD
@@ -509,7 +509,7 @@ srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
             
             
 
-              <li class="w3-padding-large"><span class="date">2020/01/05</span> &nbsp; <a href="/intro_04/">Imagen Overview</a></li>
+              <li class="w3-padding-large"><span class="date">2020/01/05</span> &nbsp; <a href="/intro_01/">basic rgee - First steps</a></li>
             
         </ul>
     </div>
@@ -540,13 +540,10 @@ srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
     <div class="w3-content" > 
       <div class="w3-bar w3-section">
 	     
-	      <a  href="https://r-earthengine.github.io/intro_02/" class="w3-btn w3-text-indigo w3-hover-green">
-	          &#10094; basic rgee - Consideration
+	      <a  href="https://r-earthengine.github.io/intro_01/" class="w3-btn w3-text-indigo w3-hover-green">
+	          &#10094; basic rgee - First steps
 	      </a>
 	    
-	      <a class="w3-btn w3-right w3-text-indigo w3-hover-green" href="https://r-earthengine.github.io/intro_04/">
-	       Imagen Overview &#10095;
-	      </a>
   	  </div>
     </div>
 	
