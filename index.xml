@@ -28,6 +28,17 @@ This doc describes coding practices that are intended to maximize the chance of 
     </item>
     
     <item>
+      <title>Image Overview</title>
+      <link>https://r-earthengine.github.io/image_01/</link>
+      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/image_01/</guid>
+      <description>Adapted from Google Earth Engine Documentation.
+raster data are represented as Image objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
+ addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. ee.Image constructor Images can be loaded by pasting an Earth Engine asset ID into the ee$Image constructor.</description>
+    </item>
+    
+    <item>
       <title>basic rgee - First steps</title>
       <link>https://r-earthengine.github.io/intro_01/</link>
       <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
