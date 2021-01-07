@@ -1,17 +1,24 @@
 ---
-author: Cesar Aybar
-categories:
-- introduction
-date: "2020-01-05"
-tags:
-- ee_install
-- ee_initialize
-title: Imagen Overview
+title: "Imagen Overview"
+author: "Fernando Prudencio"
+date: '2020-01-06'
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+categories: image
 type: post
-url: /intro_04/
-w3codecolor: true
+url: /image_01/
+w3codecolor: yes
 thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700-4f86-11eb-8750-5a5920a87d18.png
+tags:
+- ee$Image
+- ee$ImageCollection
 ---
+
+**Adapted from [Google Earth Engine Documentation](https://developers.google.com/earth-engine/best_practices).**
+
+This doc describes coding practices that are intended to maximize the chance of success for complex or expensive Earth Engine computations.
 
 ```{r klippy, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'), tooltip_message = 'Click to copy', tooltip_success = 'Done', all_precode = TRUE)
@@ -24,162 +31,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-## 1. What is Google Earth Engine ? 
+## Image Overview 
 
-**Google Earth Engine** is a computing platform that allows users to run geospatial analysis on Google's infrastructure. There are several ways to interact with the platform:
+**Table of contents**
 
- * **Explorer**
- * **Code Editor**
- * **Javascript client library**
- * **Python client library**
- * **R client library**   
+* **ee.Imagen constructor**
+* **Get an ee. Imagen from an ee.ImageCollection**
+* **Images from Cloud GeoTIFFs**
+* **Constants images**
 
-This website is focused on the last one, you can use the R client library to send/receive messages to/from the Earth Engine server and development [web applications](https://github.com/MVanDenburg92/RGEE_Shiny). 
+As mentioned in the [**Get Started**](https://developers.google.com/earth-engine/guides/getstarted#earth-engine-data-structures) doc, raster data are represented as `Image` objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
 
-## 2. The purpose of Earth Engine is to:
+### 1. ee.Image constructor
 
- * Perform highly-interactive algorithm development at global scale
+Images can be loaded by pasting an Earth Engine asset **ID** into the `ee$Image` constructor. You can find image **IDs** in the [**data catalog**](https://developers.google.com/earth-engine/datasets). For example, to load [**JAXA's ALOS DSM**](https://developers.google.com/earth-engine/datasets/catalog/JAXA_ALOS_AW3D30_V2_2):
 
- * Push the edge of the envelope for big data in remote sensing
-
- * Enable high-impact, data-driven science
-
- * Make substantive progress on global challenges that involve large geospatial datasets
-
-## 3. Components:
-
-The main components of Earth Engine are:
-
-**Datasets**: A petabyte-scale archive of publicly available remotely sensed imagery and other data. Explore the data catalog.
-
-**Compute power**: Google’s computational infrastructure optimized for parallel processing of geospatial data.
-
-**WEB REST API/Client libraries**: For making requests to the Earth Engine servers.
-
-**Code Editor**: An online Integrated Development Environment (IDE) for rapid prototyping and visualization of complex spatial analyses using the Javascript API.
-
-## 4. Meet Earth Engine 
-
-Users must considerate that the Earth Engine API and advanced Earth Engine functionality **are experimental and subject to change**. Access is limited and requires requesting access via the [form](https://earthengine.google.com/signup/). See [Earth Engine official website](https://earthengine.google.com/) to obtain more information.
-
-<iframe src="https://www.youtube.com/embed/gKGOeTFHnKY" styles="max-width: 70%;height: 500px;" frameborder="0" allowfullscreen></iframe>
-
-## 5. Why rgee instead of code editor (Javascript)?
-
-A short comparison based on [Tyler Erickson presentation](https://docs.google.com/presentation/d/1MVVeyCdm-FrMVRPop6wB3iyd85TAlwB-F9ygTQZ8S1w/pub?slide=id.g1e419debf0_1_205).
-
-<center>
-<table style="border-collapse:collapse;border-color:#ccc;border-spacing:0;border:none" class="tg"><thead><tr><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Code Editor</th><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">R</th></tr></thead><tbody><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Easy to get started</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Easy to share code between scripts.</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Trivial to share scripts</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Easier transition to a web application (<span style="font-weight:bold">Shiny</span>).</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Built in authentication</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">An I/O API more friendly with R users.</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold;color:#FE0000">Limited input/output functionality</span></td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Many, many plotting options</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold;color:#FE0000">Integration with other JS libraries is not possible</span></td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:0px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold;color:#FE0000">Some assembly (&amp; maintenance) required!.</span></td></tr></tbody></table>
-</center>
-
-## 6. Installation
-
-**rgee** only depends on [reticulate](https://cran.r-project.org/web/packages/reticulate/index.html) and [processx](https://cran.r-project.org/web/packages/processx/index.html). Therefore, users should ensure 
-that both packages can be installed on their system. To install **rgee** run as follow:
-
-```{r eval = FALSE}
-remotes::install_github("r-spatial/rgee")
-```
-
-**rgee** has two types of dependencies: <span
-style="color:#b52b09">**strict dependencies**</span> that must be
-satisfied before the **rgee** installation and the <span style="color:#857e04"><b>credentials dependencies</b></span> that 
-unlock all **rgee** I/0 functionality.
-
-If the strict dependencies are not fulfilled **rgee just will not work**. The dependencies that comprised this group are:
-
-  * <span style="color:#b52b09"><b> Google account with Earth Engine
-    activated </b></span>
-    
-  * <span style="color:#b52b09"><b> Python >= v3.5 </b></span>
-
-  * <span style="color:#b52b09"><b> EarthEngine Python API (Python package) </b></span>
-
-The activation of an **Earth Engine account** depends on each user, check
-the official website of [Google Earth Engine](https://earthengine.google.com/) for more details. If you do not count with a Python environment or a version of the EarthEngine Python API, we strongly recommend you run:
-
-```{r eval = FALSE}
-library(rgee)
-ee_install(py_env = "rgee") # It is just necessary once!
-```
-
-This function will realize the following six tasks:
-
-  1. If you do not count with a Python environment, it will display an
-  interactive  menu to install [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-  (a free minimal installer for conda).
-  
-  2. Remove the previous Python environment defined with the same name if it exists.
-  
-  3. Create a new Python environment.
-
-  4. Set the environmental variable EARTHENGINE_PYTHON and EARTHENGINE_ENV. These variables
-  will be used to define the reticulate environmental variable "RETICULATE_PYTHON" when 
-  rgee is loaded. 
-  
-  5. Install rgee Python dependencies: [Earth Engine Python API](https://pypi.org/project/earthengine-api/) and
-  [Numpy](https://pypi.org/project/numpy/).
-  
-  6. Interactive menu to confirm if restart the R session to see changes.
-
-**However, the use of rgee::ee_install() is not mandatory. You can count on with your own custom installation. This would be also allowed.** If you are a Rstudio v.1.4 > user, this [**tutorial**](https://github.com/r-spatial/rgee/tree/help/rstudio) will help you to properly set a Python Environment with your R session without **rgee::ee_install()**.  Take into account that the Python Environment you set must have installed the  [Earth Engine Python API](https://pypi.org/project/earthengine-api/) and [Numpy](https://pypi.org/project/numpy/).
-
-By the other hand, the <span style="color:#857e04"><b>credentials dependencies</b></span>
-are only needed to move data from Google Drive and Google Cloud Storage to your local environment.
-These dependencies are not mandatory. However, they will help you to create a seamless connection between
-R and Earth Engine.  The dependencies that comprised this group are shown below:
-
-  -   <span style="color:#857e04">**Google Cloud Storage
-      credential**</span>
-      
-  -   <span style="color:#857e04">**Google Drive credential**</span>
-
-See the next section to learn how to correctly set both credentials.
-
-## 7. Authentication
-
-As we have seen previously, **rgee** deal with three different Google API's:
-
-  -   Google Earth Engine
-  
-  -   Google Drive
-  
-  -   Google Cloud Storage
-
-To authenticate/initialize either Google Drive or Google Cloud Storage, you just need to run as follow:
-
-```{r eval = FALSE}
-library(rgee)
-#ee_reattach() # reattach ee as a reserve word
-
-# Initialize just Earth Engine
-ee_Initialize() 
-ee_Initialize(email = 'csaybar@gmail.com') # Use the argument email is not mandatory
-
-# Initialize Earth Engine and GD
-ee_Initialize(email = 'csaybar@gmail.com', drive = TRUE)
-
-# Initialize Earth Engine and GCS
-ee_Initialize(email = 'csaybar@gmail.com', gcs = TRUE)
-
-# Initialize Earth Engine, GD and GCS
-ee_Initialize(email = 'csaybar@gmail.com', drive = TRUE, gcs = TRUE)
-```
-
-If the Google account is verified and the permission is granted, you
-will be directed to an authentication token. Copy this token and paste
-it in the emerging GUI. Unlike Earth Engine and Google Drive, Google Cloud 
-Storage need to set up its credential manually ([link1](http://code.markedmondson.me/googleCloudStorageR/articles/googleCloudStorageR.html) and [link2](https://github.com/r-spatial/rgee/tree/help/gcs)). In all cases, the users credentials always will be stored in: 
-
-``` {r eval = FALSE}
-ee_get_earthengine_path()
-```
-
-Remember you only have to authorize once, for next sessions it will not be necessary.
-
-## 8. Hello World
-
-we know that installing **rgee** can be frustrating sometimes :( , so, congratulations to go so far :D :D. In this small example will show you how to display SRTM elevation values worldwide!.
 
 ```{r eval = FALSE}
 library(rgee)
@@ -187,27 +53,86 @@ ee_Initialize()
 srtm <- ee$Image("USGS/SRTMGL1_003")
 ```
 
-**Define visualization parameters**
+### 2. Get an ee.Image from an ee.ImageCollection
 
-```{r}
-viz <- list(
-  max = 4000,
+The standard way to get an image out of a collection is to filter the collection, with filters in order of decreasing specificity. For example, to get an image out of the [**Sentinel-2 surface reflectance collection**](Sentinel-2 MSI: MultiSpectral Instrument, Level-1C):
+
+```{r eval = FALSE}
+# Load an image collection
+sen <- ee$ImageCollection("COPERNICUS/S2")$
+  filterBounds(ee$Geometry$Point(-70.48, 43.3631))$
+  filterDate('2019-01-01', '2019-12-31')$
+  sort('CLOUDY_PIXEL_PERCENTAGE')$
+  first()
+
+# Define the visualization parameters.
+vizParams <- list(
+  bands = c("B4", "B3", "B2"),
   min = 0,
-  palette = c("#000000","#5AAD5A","#A9AD84","#FFFFFF")
+  max = 2000,
+  gamma = c(0.95, 1.1, 1)
 )
+
+# Center the map and display the image.
+Map$centerObject(sen, 11)
+# You can see it
+Map$addLayer(sen, vizParams, 'first')
 ```
+Note that the sort is after the filters. Avoid sorting the entire collection.
 
-**Use Map$addLayer to visualize the map interactively**
+### 3. Images from Cloud GeoTIFFS
+You can use `ee$Image$loadGeoTIFF()` to load images from [**Cloud Optimized GeoTIFFs**](https://github.com/cogeotiff/cog-spec/blob/master/spec.md) in [**Google Cloud Storage**](https://cloud.google.com/storage). For example, the [**public Landsat dataset**](https://console.cloud.google.com/marketplace/details/usgs-public-data/landast?pli=1) hosted in Google Cloud contains [**this GeoTIFF**](https://console.cloud.google.com/storage/browser/_details/gcp-public-data-landsat/LC08/01/001/002/LC08_L1GT_001002_20160817_20170322_01_T2/LC08_L1GT_001002_20160817_20170322_01_T2_B5.TIF), corresponding to band 5 from a Landsat 8 scene. You can load this image from Cloud Storage using `ee$Image$loadGeoTIFF()`:
 
-```{r eval=FALSE}
-Map$addLayer(
-  eeObject = srtm,
-  visParams =  viz,
-  name = 'SRTM',
-  legend = TRUE
+```{r eval = FALSE}
+uri <- sprintf(
+  "%1s%2s%3s",
+  "gs://gcp-public-data-landsat/LC08/01/001/002/",
+  "LC08_L1GT_001002_20160817_20170322_01_T2/",
+  "LC08_L1GT_001002_20160817_20170322_01_T2_B5.TIF"
 )
-```
 
-<center>
-<img src="https://user-images.githubusercontent.com/16768318/103684232-8bd56a80-4f8b-11eb-8bbb-fac3e1c2aada.png" width="90%">
-</center>
+cloudImage <- ee$Image$loadGeoTIFF(uri)
+
+print(cloudImage)
+```
+Note that if you want to reload a Cloud Optimized GeoTIFF that you [**export from Earth Engine to Cloud Storage**](https://developers.google.com/earth-engine/guides/exporting#to-cloud-storage), when you do the export, set cloudOptimized to true as described [**here**](https://developers.google.com/earth-engine/guides/exporting#configuration-parameters).
+
+### 4. Constants images
+In addition to loading images by **ID**, you can also create images from constants, lists or other suitable Earth Engine objects. The following illustrates methods for creating images, getting band subsets, and manipulating bands:
+
+```{r eval = FALSE}
+library(rgee)
+
+ee_Initialize()
+
+# Create a constant Image with a pixel value of 1.
+image1 <- ee$Image(1)
+print(image1, type = "json")
+print(image1, type = "simply")
+print(image1, type = "ee_print")
+# You can see it.
+Map$addLayer(image1)
+
+# Concatenate two Images into one multi-band image.
+image2 <- ee$Image(2)
+image3 <- ee$Image$cat(c(image1, image2))
+ee_print(image3, clean = TRUE)
+
+# Change print option by: "simply","json","ee_print"
+options(rgee.print.option = "simply")
+
+# Create a multi-band image from a list of constants.
+multiband <- ee$Image(c(1, 2, 3))
+print(multiband)
+
+# Select and (optionally) rename bands.
+renamed <- multiband$select(
+  opt_selectors = c("constant", "constant_1", "constant_2"), # old names
+  opt_names = c("band1", "band2", "band3")                   # new names
+)
+ee_print(renamed)
+
+# Add bands to an image.
+image4 <- image3$addBands(ee$Image(42))
+print(image4)
+```
