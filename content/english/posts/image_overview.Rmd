@@ -1,24 +1,21 @@
 ---
-title: "Image - Image Overview"
-author: "Fernando Prudencio"
-date: '2020-01-06'
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
-categories: image
+author: Fernando Prudencio
+categories:
+- image
+date: "2020-01-06"
+tags:
+- image
+- imageCollection
+title: Image Overview
 type: post
 url: /image_01/
-w3codecolor: yes
-thumbnail: https://user-images.githubusercontent.com/16768318/103680296-3fd3f700-4f86-11eb-8750-5a5920a87d18.png
-tags:
-- ee$Image
-- ee$ImageCollection
+w3codecolor: true
+thumbnail: https://user-images.githubusercontent.com/16768318/103922338-e3064700-5113-11eb-953d-34432969a9b9.png
 ---
 
-**Adapted from [Google Earth Engine Documentation](https://developers.google.com/earth-engine/best_practices).**
+**Adapted from [Google Earth Engine Documentation](https://developers.google.com/earth-engine/guides/image_overview).**
 
-This doc describes coding practices that are intended to maximize the chance of success for complex or expensive Earth Engine computations.
+raster data are represented as **Image** objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
 
 ```{r klippy, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'), tooltip_message = 'Click to copy', tooltip_success = 'Done', all_precode = TRUE)
@@ -27,18 +24,9 @@ klippy::klippy(position = c('top', 'right'), tooltip_message = 'Click to copy', 
 
 ```{r, setup, include=FALSE}
 knitr::opts_chunk$set(
-  comment = '', fig.width = 6, fig.height = 6
+  comment = '', fig.width = 6, fig.height = 6, eval = FALSE
 )
 ```
-
-**Table of contents**
-
-* **ee.Imagen constructor**
-* **Get an ee. Imagen from an ee.ImageCollection**
-* **Images from Cloud GeoTIFFs**
-* **Constants images**
-
-As mentioned in the [**Get Started**](https://developers.google.com/earth-engine/guides/getstarted#earth-engine-data-structures) doc, raster data are represented as `Image` objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
 
 ### 1. ee.Image constructor
 
@@ -72,11 +60,35 @@ vizParams <- list(
 )
 
 # Center the map and display the image.
-Map$centerObject(sen, 11)
+Map$centerObject(sen, 7)
 # You can see it
-Map$addLayer(sen, vizParams, 'first')
+m1 <- Map$addLayer(sen, vizParams, 'first')
+m1
 ```
+
+<figure>
+  <center>
+    <img src="https://user-images.githubusercontent.com/16768318/103921860-480d6d00-5113-11eb-9972-ea79088ef618.png" width="60%"><br>
+    <caption><strong>Figure N°01:</strong> Sentinel-2 RGB Porland,USA </caption>
+  </center><br>
+</figure>
+
 Note that the sort is after the filters. Avoid sorting the entire collection.
+
+
+To display the results in QGIS copy `m1$rgee$tokens` into XYZ Tiles:
+
+```{r}
+m1$rgee$tokens
+#[1] > "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/af6fc12945dfe1342891968f6b8b3c47-d47e902ef95199a5c37959f3aec47388/tiles/{z}/{x}/{y}"
+```     
+
+<figure>
+  <center>
+    <img src="https://user-images.githubusercontent.com/16768318/103919226-1b0b8b00-5110-11eb-8c83-5a79325297da.png" width="85%"><br>
+    <caption><strong>Figure N°02:</strong> rgee & QGIS map integration</caption>
+  </center><br>
+</figure>
 
 ### 3. Images from Cloud GeoTIFFS
 You can use `ee$Image$loadGeoTIFF()` to load images from [**Cloud Optimized GeoTIFFs**](https://github.com/cogeotiff/cog-spec/blob/master/spec.md) in [**Google Cloud Storage**](https://cloud.google.com/storage). For example, the [**public Landsat dataset**](https://console.cloud.google.com/marketplace/details/usgs-public-data/landast?pli=1) hosted in Google Cloud contains [**this GeoTIFF**](https://console.cloud.google.com/storage/browser/_details/gcp-public-data-landsat/LC08/01/001/002/LC08_L1GT_001002_20160817_20170322_01_T2/LC08_L1GT_001002_20160817_20170322_01_T2_B5.TIF), corresponding to band 5 from a Landsat 8 scene. You can load this image from Cloud Storage using `ee$Image$loadGeoTIFF()`:
