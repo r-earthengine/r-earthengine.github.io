@@ -1,0 +1,288 @@
+---
+author: Fernando Prudencio
+categories:
+- image
+date: "2020-01-08"
+tags:
+- image
+- imageCollection
+title: Image Visualization
+type: post
+url: /image_02/
+w3codecolor: true
+thumbnail: https://user-images.githubusercontent.com/16768318/103922338-e3064700-5113-11eb-953d-34432969a9b9.png
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/clipboard/clipboard.min.js"></script>
+<link href="/rmarkdown-libs/primer-tooltips/build.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/klippy/css/klippy.min.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
+
+
+<p><strong>Adapted from <a href="https://developers.google.com/earth-engine/guides/image_visualization">Google Earth Engine Documentation</a>.</strong></p>
+<p>You can visualize an image using <code>Map$addLayer()</code>. If you add a layer to the map without any additional parameters, by default the Code Editor assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable. To achieve desirable visualization effects, you can provide visualization parameters to <code>Map$addLayer()</code>. Specifically, the parameters are:</p>
+<script>
+  addClassKlippyToPreCode();
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
+</script>
+<center>
+<style type="text/css">
+  .tg  {border-collapse:collapse;border-spacing:0;}
+  .tg td{border-bottom-width:1px;border-color:black;border-style:solid;border-top-width:1px;border-width:0px;
+    font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+  .tg th{border-bottom-width:1px;border-color:black;border-style:solid;border-top-width:1px;border-width:0px;
+    font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+  .tg .tg-abx8{background-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:top}
+  .tg .tg-uqo3{background-color:#efefef;text-align:center;vertical-align:top}
+  .tg .tg-8zwo{font-style:italic;text-align:left;vertical-align:top}
+  .tg .tg-0lax{text-align:left;vertical-align:top}
+  </style>
+<table class="tg" style="undefined;table-layout: fixed; width: 646px">
+<colgroup>
+<col style="width: 79.75px">
+<col style="width: 312.75px">
+<col style="width: 253.75px">
+</colgroup>
+<thead>
+<tr>
+<th class="tg-uqo3" colspan="3">
+<span style="font-weight:bold">Visualization parameters for</span> Map$addLayer()
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-abx8">
+Parameter
+</td>
+<td class="tg-abx8">
+Description
+</td>
+<td class="tg-abx8">
+Type
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+bands
+</td>
+<td class="tg-0lax">
+Comma-delimited list of three band names to be mapper to RGB
+</td>
+<td class="tg-0lax">
+list
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+min
+</td>
+<td class="tg-0lax">
+Value(s) to map to 0
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+max
+</td>
+<td class="tg-0lax">
+Value(s) to map to 255
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+gain
+</td>
+<td class="tg-0lax">
+Value(s) by which to multiply each pixel value
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+bias
+</td>
+<td class="tg-0lax">
+Value(s) to add to each DN
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+gamma
+</td>
+<td class="tg-0lax">
+Gamma correction factor(s)
+</td>
+<td class="tg-0lax">
+<span style="font-weight:400;font-style:normal">number or list of three numbers, one for each band</span>
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+palette
+</td>
+<td class="tg-0lax">
+List of CSS-style color strings (single-band images only)
+</td>
+<td class="tg-0lax">
+comma-separated list hex strings
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+opacity
+</td>
+<td class="tg-0lax">
+The opacity of the layer (0.0 is fully transparent and 1.0 is fully opaque)
+</td>
+<td class="tg-0lax">
+number
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+format
+</td>
+<td class="tg-0lax">
+Either “jpg” or “png”
+</td>
+<td class="tg-0lax">
+string
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+<div id="rgb-composites" class="section level3">
+<h3>1. RGB composites</h3>
+<p>The following illustrates the use of parameters to style a Landsat 8 image as a false-color composite:</p>
+<pre class="r"><code>library(rgee)
+ee_Initialize()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Define the visualization parameters.
+vizParams &lt;- list(
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
+  min = 0,
+  max = 0.5,
+  gamma = c(0.95, 1.1, 1)
+)
+
+# Center the map and display the image.
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)</code></pre>
+<p>In this example, band <code>‘B5’</code> is assigned to red, <code>‘B4’</code> is assigned to green, and <code>‘B3’</code> is assigned to blue. The result should look something like <strong>Figure 1</strong>.</p>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/49989177/104054975-04bb0900-51bc-11eb-9737-6e4f12063e30.png" width="60%"><br>
+<caption>
+<strong>Figure N°01:</strong> Landsat 8 false color composite of San Francisco bay area, California, USA.
+</caption>
+</center>
+<br>
+</figure>
+</div>
+<div id="color-palettes" class="section level3">
+<h3>2. Color palettes</h3>
+<p>To display a single band of an image in color, set the <code>palette</code> parameter with a color ramp represented by a list of CSS-style color strings. (See <a href="https://en.wikipedia.org/wiki/Web_colors"><strong>this reference</strong></a> for more information). The following example illustrates how to use colors from cyan (<code>‘00FFFF’</code>) to blue (<code>‘0000FF’</code>) to render a <a href="https://www.tandfonline.com/doi/abs/10.1080/01431169608948714"><strong>Normalized Difference Water Index (NDWI)</strong></a> image:</p>
+<pre class="r"><code># Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Create an NDWI image.
+ndwi &lt;- landsat$normalizedDifference(c(&#39;B3&#39;, &#39;B5&#39;))
+
+# define visualization parameters and display image.
+ndwiViz &lt;- list(
+  min = 0.5,
+  max = 1,
+  palette = c(&#39;00FFFF&#39;, &#39;0000FF&#39;)
+)
+
+Map$addLayer(
+  eeObject = ndwi,
+  visParams = ndwiViz,
+  name = &#39;NDWI&#39;,
+  shown = FALSE
+)</code></pre>
+<p>In this example, note that the <code>min</code> and <code>max</code> parameters indicate the range of pixel values to which the palette should be applied. Intermediate values are linearly stretched. Also note that if you define <code>shown</code> parameter as <code>FALSE</code>, this results in the visibility of the layer being off when it is added to the map. It can always be turned on again using the <strong>Layer Manager</strong> in the upper left corner of the map. The result should look something like <strong>Figure 2</strong>.</p>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/49989177/104057949-f4595d00-51c0-11eb-980e-575f119b0098.png" width="60%"><br>
+<caption>
+<strong>Figure N°02:</strong> Landsat 8 NDWI, San Francisco bay area, USA. Same area as Figure 1. Cyan are low values, blue are high values.
+</caption>
+</center>
+<br>
+</figure>
+</div>
+<div id="masking" class="section level3">
+<h3>3. Masking</h3>
+<p>You can use <code>image$updateMask()</code> to set the opacity of individual pixels based on where pixels in a mask image are non-zero. Pixels equal to zero in the mask are excluded from computations and the opacity is set to 0 for display. The following example uses an NDWI threshold to update the mask on the NDWI layer created previously:</p>
+<pre class="r"><code># Mask the non-watery parts of the image, where NDWI &lt; 0.4.
+ndwiMasked &lt;- ndwi$updateMask(ndwi$gte(0.4))
+Map$addLayer(ndwiMasked, ndwiViz, &#39;NDWI masked&#39;)</code></pre>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/49989177/104058569-eb1cc000-51c1-11eb-8d55-59d45e8890de.png" width="60%"><br>
+<caption>
+<strong>Figure N°03:</strong> Landsat 8 NDWI, same area as Figure 2, was masked for values greater than 0,4.
+</caption>
+</center>
+<br>
+</figure>
+</div>
+<div id="visualization-images" class="section level3">
+<h3>4. Visualization images</h3>
+<p>Use the <code>image$visualize()</code> method to convert an image into an 8-bit RGB image for display or export. For example, to convert the false-color composite and NDWI to 3-band display images, use:</p>
+<pre class="r"><code># Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Create visualization layers.
+imageRGB &lt;- landsat$visualize(
+  list(
+    bands = list(&quot;B5&quot;, &quot;B4&quot;, &quot;B3&quot;),
+    max = 0.5
+  )
+)
+
+ndwiRGB &lt;- ndwiMasked$visualize(
+  list(
+    min = 0.5,
+    max = 1,
+    palette = c(&#39;00FFFF&#39;, &#39;0000FF&#39;)
+  )
+)</code></pre>
+</div>
+<div id="mosaicking" class="section level3">
+<h3>5. Mosaicking</h3>
+<p>You can use masking and <code>imageCollection$mosaic()</code> to achieve various cartographic effects. The <code>mosaic()</code> method renders layers in the output image according to their order in the input collection. The following example uses <code>mosaic()</code> to combine the masked NDWI and the false color composite and obtain a new visualization:</p>
+<pre class="r"><code># Mosaic the visualization layers and display (or export).
+mosaic &lt;- ee$ImageCollection(list(imageRGB, ndwiRGB))$mosaic()
+Map$addLayer(eeObject = mosaic, list(), name = &#39;mosaic&#39;)</code></pre>
+<p>In this example, observe that a list of the two visualization images is provided to the <code>ImageCollection</code> constructor. The order of the list determines the order in which the images are rendered on the map. The result should look something like <strong>Figure 3</strong>.</p>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/49989177/104064431-ee1cae00-51cb-11eb-97b5-0980634c8a25.png" width="60%"><br>
+<caption>
+<strong>Figure N°04:</strong> Mosaic of a Landsat 8 false color composite and NDWI. San Francisco bay area, USA.
+</caption>
+</center>
+<br>
+</figure>
+</div>
