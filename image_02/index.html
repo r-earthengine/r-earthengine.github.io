@@ -16,27 +16,25 @@
     
     
 
-<title>Image Overview • rgee Theme</title>
+<title>Image Visualization • rgee Theme</title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Image Overview"/>
+<meta name="twitter:title" content="Image Visualization"/>
 <meta name="twitter:description" content="Adapted from Google Earth Engine Documentation.
-raster data are represented as Image objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
- addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. ee.Image constructor Images can be loaded by pasting an Earth Engine asset ID into the ee$Image constructor."/>
+You can visualize an image using Map$addLayer(). If you add a layer to the map without any additional parameters, by default the Code Editor assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable."/>
 
-<meta property="og:title" content="Image Overview" />
+<meta property="og:title" content="Image Visualization" />
 <meta property="og:description" content="Adapted from Google Earth Engine Documentation.
-raster data are represented as Image objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
- addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. ee.Image constructor Images can be loaded by pasting an Earth Engine asset ID into the ee$Image constructor." />
+You can visualize an image using Map$addLayer(). If you add a layer to the map without any additional parameters, by default the Code Editor assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://r-earthengine.github.io/image_01/" />
-<meta property="article:published_time" content="2020-01-06T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-01-06T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
+<meta property="og:url" content="https://r-earthengine.github.io/image_02/" />
+<meta property="article:published_time" content="2020-01-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-08T00:00:00+00:00" /><meta property="og:site_name" content="rgee Theme" />
 
 
 
-<link rel="canonical" href="https://r-earthengine.github.io/image_01/" />
+<link rel="canonical" href="https://r-earthengine.github.io/image_02/" />
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -232,13 +230,13 @@ function displaymenu() {
   <div class="w3-content w3-card-4" >
     
     <header class="w3-container w3-center w3-padding-32">
-      <h1>Image Overview</h1>
+      <h1>Image Visualization</h1>
 
       <div >
-        <p> 2020-01-06 
+        <p> 2020-01-08 
           
-             <code> 488 words  </code>
-             <code> 3 mins read </code>
+             <code> 899 words  </code>
+             <code> 5 mins read </code>
           
         </p>
         <div >
@@ -272,118 +270,270 @@ function displaymenu() {
 <script src="/rmarkdown-libs/klippy/js/klippy.min.js"></script>
 
 
-<p><strong>Adapted from <a href="https://developers.google.com/earth-engine/guides/image_overview">Google Earth Engine Documentation</a>.</strong></p>
-<p>raster data are represented as <strong>Image</strong> objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.</p>
+<p><strong>Adapted from <a href="https://developers.google.com/earth-engine/guides/image_visualization">Google Earth Engine Documentation</a>.</strong></p>
+<p>You can visualize an image using <code>Map$addLayer()</code>. If you add a layer to the map without any additional parameters, by default the Code Editor assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable. To achieve desirable visualization effects, you can provide visualization parameters to <code>Map$addLayer()</code>. Specifically, the parameters are:</p>
 <script>
   addClassKlippyToPreCode();
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Click to copy', 'Done');
 </script>
-<div id="ee.image-constructor" class="section level3">
-<h3>1. ee.Image constructor</h3>
-<p>Images can be loaded by pasting an Earth Engine asset <strong>ID</strong> into the <code>ee$Image</code> constructor. You can find image <strong>IDs</strong> in the <a href="https://developers.google.com/earth-engine/datasets"><strong>data catalog</strong></a>. For example, to load <a href="https://developers.google.com/earth-engine/datasets/catalog/JAXA_ALOS_AW3D30_V2_2"><strong>JAXA’s ALOS DSM</strong></a>:</p>
+<center>
+<style type="text/css">
+  .tg  {border-collapse:collapse;border-spacing:0;}
+  .tg td{border-bottom-width:1px;border-color:black;border-style:solid;border-top-width:1px;border-width:0px;
+    font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+  .tg th{border-bottom-width:1px;border-color:black;border-style:solid;border-top-width:1px;border-width:0px;
+    font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+  .tg .tg-abx8{background-color:#c0c0c0;font-weight:bold;text-align:left;vertical-align:top}
+  .tg .tg-uqo3{background-color:#efefef;text-align:center;vertical-align:top}
+  .tg .tg-8zwo{font-style:italic;text-align:left;vertical-align:top}
+  .tg .tg-0lax{text-align:left;vertical-align:top}
+  </style>
+<table class="tg" style="undefined;table-layout: fixed; width: 646px">
+<colgroup>
+<col style="width: 79.75px">
+<col style="width: 312.75px">
+<col style="width: 253.75px">
+</colgroup>
+<thead>
+<tr>
+<th class="tg-uqo3" colspan="3">
+<span style="font-weight:bold">Visualization parameters for</span> Map$addLayer()
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-abx8">
+Parameter
+</td>
+<td class="tg-abx8">
+Description
+</td>
+<td class="tg-abx8">
+Type
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+bands
+</td>
+<td class="tg-0lax">
+Comma-delimited list of three band names to be mapper to RGB
+</td>
+<td class="tg-0lax">
+list
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+min
+</td>
+<td class="tg-0lax">
+Value(s) to map to 0
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+max
+</td>
+<td class="tg-0lax">
+Value(s) to map to 255
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+gain
+</td>
+<td class="tg-0lax">
+Value(s) by which to multiply each pixel value
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+bias
+</td>
+<td class="tg-0lax">
+Value(s) to add to each DN
+</td>
+<td class="tg-0lax">
+number or list of three numbers, one for each band
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+gamma
+</td>
+<td class="tg-0lax">
+Gamma correction factor(s)
+</td>
+<td class="tg-0lax">
+<span style="font-weight:400;font-style:normal">number or list of three numbers, one for each band</span>
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+palette
+</td>
+<td class="tg-0lax">
+List of CSS-style color strings (single-band images only)
+</td>
+<td class="tg-0lax">
+comma-separated list hex strings
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+opacity
+</td>
+<td class="tg-0lax">
+The opacity of the layer (0.0 is fully transparent and 1.0 is fully opaque)
+</td>
+<td class="tg-0lax">
+number
+</td>
+</tr>
+<tr>
+<td class="tg-8zwo">
+format
+</td>
+<td class="tg-0lax">
+Either “jpg” or “png”
+</td>
+<td class="tg-0lax">
+string
+</td>
+</tr>
+</tbody>
+</table>
+</center>
+<div id="rgb-composites" class="section level3">
+<h3>1. RGB composites</h3>
+<p>The following illustrates the use of parameters to style a Landsat 8 image as a false-color composite:</p>
 <pre class="r"><code>library(rgee)
 ee_Initialize()
-srtm &lt;- ee$Image(&quot;USGS/SRTMGL1_003&quot;)</code></pre>
-</div>
-<div id="get-an-ee.image-from-an-ee.imagecollection" class="section level3">
-<h3>2. Get an ee.Image from an ee.ImageCollection</h3>
-<p>The standard way to get an image out of a collection is to filter the collection, with filters in order of decreasing specificity. For example, to get an image out of the <a href="Sentinel-2%20MSI:%20MultiSpectral%20Instrument,%20Level-1C"><strong>Sentinel-2 surface reflectance collection</strong></a>:</p>
-<pre class="r"><code># Load an image collection
-sen &lt;- ee$ImageCollection(&quot;COPERNICUS/S2&quot;)$
-  filterBounds(ee$Geometry$Point(-70.48, 43.3631))$
-  filterDate(&#39;2019-01-01&#39;, &#39;2019-12-31&#39;)$
-  sort(&#39;CLOUDY_PIXEL_PERCENTAGE&#39;)$
-  first()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
 
 # Define the visualization parameters.
 vizParams &lt;- list(
-  bands = c(&quot;B4&quot;, &quot;B3&quot;, &quot;B2&quot;),
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
   min = 0,
-  max = 2000,
+  max = 0.5,
   gamma = c(0.95, 1.1, 1)
 )
 
 # Center the map and display the image.
-Map$centerObject(sen, 7)
-# You can see it
-m1 &lt;- Map$addLayer(sen, vizParams, &#39;first&#39;)
-m1</code></pre>
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)</code></pre>
+<p>In this example, band <code>‘B5’</code> is assigned to red, <code>‘B4’</code> is assigned to green, and <code>‘B3’</code> is assigned to blue. The result should look something like <strong>Figure 1</strong>.</p>
 <figure>
 <center>
-<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/16768318/103921860-480d6d00-5113-11eb-9972-ea79088ef618.png" width="60%"><br>
+<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/49989177/104054975-04bb0900-51bc-11eb-9737-6e4f12063e30.png" width="60%"><br>
 <caption>
-<strong>Figure N°01:</strong> Sentinel-2 RGB Porland,USA
-</caption>
-</center>
-<br>
-</figure>
-<p>Note that the sort is after the filters. Avoid sorting the entire collection.</p>
-<p>To display the results in QGIS copy <code>m1$rgee$tokens</code> into XYZ Tiles:</p>
-<pre class="r"><code>m1$rgee$tokens
-#[1] &gt; &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/af6fc12945dfe1342891968f6b8b3c47-d47e902ef95199a5c37959f3aec47388/tiles/{z}/{x}/{y}&quot;</code></pre>
-<figure>
-<center>
-<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/16768318/103919226-1b0b8b00-5110-11eb-8c83-5a79325297da.png" width="85%"><br>
-<caption>
-<strong>Figure N°02:</strong> rgee &amp; QGIS map integration
+<strong>Figure N°01:</strong> Landsat 8 false color composite of San Francisco bay area, California, USA.
 </caption>
 </center>
 <br>
 </figure>
 </div>
-<div id="images-from-cloud-geotiffs" class="section level3">
-<h3>3. Images from Cloud GeoTIFFS</h3>
-<p>You can use <code>ee$Image$loadGeoTIFF()</code> to load images from <a href="https://github.com/cogeotiff/cog-spec/blob/master/spec.md"><strong>Cloud Optimized GeoTIFFs</strong></a> in <a href="https://cloud.google.com/storage"><strong>Google Cloud Storage</strong></a>. For example, the <a href="https://console.cloud.google.com/marketplace/details/usgs-public-data/landast?pli=1"><strong>public Landsat dataset</strong></a> hosted in Google Cloud contains <a href="https://console.cloud.google.com/storage/browser/_details/gcp-public-data-landsat/LC08/01/001/002/LC08_L1GT_001002_20160817_20170322_01_T2/LC08_L1GT_001002_20160817_20170322_01_T2_B5.TIF"><strong>this GeoTIFF</strong></a>, corresponding to band 5 from a Landsat 8 scene. You can load this image from Cloud Storage using <code>ee$Image$loadGeoTIFF()</code>:</p>
-<pre class="r"><code>uri &lt;- sprintf(
-  &quot;%1s%2s%3s&quot;,
-  &quot;gs://gcp-public-data-landsat/LC08/01/001/002/&quot;,
-  &quot;LC08_L1GT_001002_20160817_20170322_01_T2/&quot;,
-  &quot;LC08_L1GT_001002_20160817_20170322_01_T2_B5.TIF&quot;
+<div id="color-palettes" class="section level3">
+<h3>2. Color palettes</h3>
+<p>To display a single band of an image in color, set the <code>palette</code> parameter with a color ramp represented by a list of CSS-style color strings. (See <a href="https://en.wikipedia.org/wiki/Web_colors"><strong>this reference</strong></a> for more information). The following example illustrates how to use colors from cyan (<code>‘00FFFF’</code>) to blue (<code>‘0000FF’</code>) to render a <a href="https://www.tandfonline.com/doi/abs/10.1080/01431169608948714"><strong>Normalized Difference Water Index (NDWI)</strong></a> image:</p>
+<pre class="r"><code># Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Create an NDWI image.
+ndwi &lt;- landsat$normalizedDifference(c(&#39;B3&#39;, &#39;B5&#39;))
+
+# define visualization parameters and display image.
+ndwiViz &lt;- list(
+  min = 0.5,
+  max = 1,
+  palette = c(&#39;00FFFF&#39;, &#39;0000FF&#39;)
 )
 
-cloudImage &lt;- ee$Image$loadGeoTIFF(uri)
-
-print(cloudImage)</code></pre>
-<p>Note that if you want to reload a Cloud Optimized GeoTIFF that you <a href="https://developers.google.com/earth-engine/guides/exporting#to-cloud-storage"><strong>export from Earth Engine to Cloud Storage</strong></a>, when you do the export, set cloudOptimized to true as described <a href="https://developers.google.com/earth-engine/guides/exporting#configuration-parameters"><strong>here</strong></a>.</p>
+Map$addLayer(
+  eeObject = ndwi,
+  visParams = ndwiViz,
+  name = &#39;NDWI&#39;,
+  shown = FALSE
+)</code></pre>
+<p>In this example, note that the <code>min</code> and <code>max</code> parameters indicate the range of pixel values to which the palette should be applied. Intermediate values are linearly stretched. Also note that if you define <code>shown</code> parameter as <code>FALSE</code>, this results in the visibility of the layer being off when it is added to the map. It can always be turned on again using the <strong>Layer Manager</strong> in the upper left corner of the map. The result should look something like <strong>Figure 2</strong>.</p>
+<figure>
+<center>
+<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/49989177/104057949-f4595d00-51c0-11eb-980e-575f119b0098.png" width="60%"><br>
+<caption>
+<strong>Figure N°02:</strong> Landsat 8 NDWI, San Francisco bay area, USA. Same area as Figure 1. Cyan are low values, blue are high values.
+</caption>
+</center>
+<br>
+</figure>
 </div>
-<div id="constants-images" class="section level3">
-<h3>4. Constants images</h3>
-<p>In addition to loading images by <strong>ID</strong>, you can also create images from constants, lists or other suitable Earth Engine objects. The following illustrates methods for creating images, getting band subsets, and manipulating bands:</p>
-<pre class="r"><code>library(rgee)
+<div id="masking" class="section level3">
+<h3>3. Masking</h3>
+<p>You can use <code>image$updateMask()</code> to set the opacity of individual pixels based on where pixels in a mask image are non-zero. Pixels equal to zero in the mask are excluded from computations and the opacity is set to 0 for display. The following example uses an NDWI threshold to update the mask on the NDWI layer created previously:</p>
+<pre class="r"><code># Mask the non-watery parts of the image, where NDWI &lt; 0.4.
+ndwiMasked &lt;- ndwi$updateMask(ndwi$gte(0.4))
+Map$addLayer(ndwiMasked, ndwiViz, &#39;NDWI masked&#39;)</code></pre>
+<figure>
+<center>
+<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/49989177/104058569-eb1cc000-51c1-11eb-8d55-59d45e8890de.png" width="60%"><br>
+<caption>
+<strong>Figure N°03:</strong> Landsat 8 NDWI, same area as Figure 2, was masked for values greater than 0,4.
+</caption>
+</center>
+<br>
+</figure>
+</div>
+<div id="visualization-images" class="section level3">
+<h3>4. Visualization images</h3>
+<p>Use the <code>image$visualize()</code> method to convert an image into an 8-bit RGB image for display or export. For example, to convert the false-color composite and NDWI to 3-band display images, use:</p>
+<pre class="r"><code># Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
 
-ee_Initialize()
-
-# Create a constant Image with a pixel value of 1.
-image1 &lt;- ee$Image(1)
-print(image1, type = &quot;json&quot;)
-print(image1, type = &quot;simply&quot;)
-print(image1, type = &quot;ee_print&quot;)
-# You can see it.
-Map$addLayer(image1)
-
-# Concatenate two Images into one multi-band image.
-image2 &lt;- ee$Image(2)
-image3 &lt;- ee$Image$cat(c(image1, image2))
-ee_print(image3, clean = TRUE)
-
-# Change print option by: &quot;simply&quot;,&quot;json&quot;,&quot;ee_print&quot;
-options(rgee.print.option = &quot;simply&quot;)
-
-# Create a multi-band image from a list of constants.
-multiband &lt;- ee$Image(c(1, 2, 3))
-print(multiband)
-
-# Select and (optionally) rename bands.
-renamed &lt;- multiband$select(
-  opt_selectors = c(&quot;constant&quot;, &quot;constant_1&quot;, &quot;constant_2&quot;), # old names
-  opt_names = c(&quot;band1&quot;, &quot;band2&quot;, &quot;band3&quot;)                   # new names
+# Create visualization layers.
+imageRGB &lt;- landsat$visualize(
+  list(
+    bands = list(&quot;B5&quot;, &quot;B4&quot;, &quot;B3&quot;),
+    max = 0.5
+  )
 )
-ee_print(renamed)
 
-# Add bands to an image.
-image4 &lt;- image3$addBands(ee$Image(42))
-print(image4)</code></pre>
+ndwiRGB &lt;- ndwiMasked$visualize(
+  list(
+    min = 0.5,
+    max = 1,
+    palette = c(&#39;00FFFF&#39;, &#39;0000FF&#39;)
+  )
+)</code></pre>
+</div>
+<div id="mosaicking" class="section level3">
+<h3>5. Mosaicking</h3>
+<p>You can use masking and <code>imageCollection$mosaic()</code> to achieve various cartographic effects. The <code>mosaic()</code> method renders layers in the output image according to their order in the input collection. The following example uses <code>mosaic()</code> to combine the masked NDWI and the false color composite and obtain a new visualization:</p>
+<pre class="r"><code># Mosaic the visualization layers and display (or export).
+mosaic &lt;- ee$ImageCollection(list(imageRGB, ndwiRGB))$mosaic()
+Map$addLayer(eeObject = mosaic, list(), name = &#39;mosaic&#39;)</code></pre>
+<p>In this example, observe that a list of the two visualization images is provided to the <code>ImageCollection</code> constructor. The order of the list determines the order in which the images are rendered on the map. The result should look something like <strong>Figure 3</strong>.</p>
+<figure>
+<center>
+<img src="/placeholder.svg" data-src="https://user-images.githubusercontent.com/49989177/104064431-ee1cae00-51cb-11eb-97b5-0980634c8a25.png" width="60%"><br>
+<caption>
+<strong>Figure N°04:</strong> Mosaic of a Landsat 8 false color composite and NDWI. San Francisco bay area, USA.
+</caption>
+</center>
+<br>
+</figure>
 </div>
 
                  
@@ -419,6 +569,18 @@ print(image4)</code></pre>
     
     
     
+    <div class="w3-container">
+        
+        <h2>Related Articles:</h2>
+        <ul class="w3-ul w3-hoverable">
+            
+            
+
+              <li class="w3-padding-large"><span class="date">2020/01/06</span> &nbsp; <a href="/image_01/">Image Overview</a></li>
+            
+        </ul>
+    </div>
+    
     
     <br>  
 </div>
@@ -445,12 +607,9 @@ print(image4)</code></pre>
     <div class="w3-content" > 
       <div class="w3-bar w3-section">
 	     
-	      <a  href="https://r-earthengine.github.io/intro_02/" class="w3-btn w3-text-indigo w3-hover-green">
-	          &#10094; basic rgee - Consideration
-	      </a>
 	    
-	      <a class="w3-btn w3-right w3-text-indigo w3-hover-green" href="https://r-earthengine.github.io/intro_01/">
-	       basic rgee - First steps &#10095;
+	      <a class="w3-btn w3-right w3-text-indigo w3-hover-green" href="https://r-earthengine.github.io/intro_03/">
+	       basic rgee - Best practices &#10095;
 	      </a>
   	  </div>
     </div>
