@@ -2,19 +2,21 @@
 author: Fernando Prudencio
 categories:
 - image
-date: "2020-01-08"
+date: "2020-01-05"
 tags:
-- image
-- imageCollection
+- Map.addLayer  
+- ee.Image.updateMask 
+- ee.Image.visualize  
+- ee.Image
+- ee.ImageCollection
 title: Image Visualization
 type: post
 url: /image_02/
 w3codecolor: true
-thumbnail: https://user-images.githubusercontent.com/16768318/103922338-e3064700-5113-11eb-953d-34432969a9b9.png
+thumbnail: https://user-images.githubusercontent.com/16768318/104091120-9a699d80-527b-11eb-8d4a-ee9bfd57360e.png
 ---
 
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 <script src="/rmarkdown-libs/clipboard/clipboard.min.js"></script>
 <link href="/rmarkdown-libs/primer-tooltips/build.css" rel="stylesheet" />
 <link href="/rmarkdown-libs/klippy/css/klippy.min.css" rel="stylesheet" />
@@ -22,7 +24,7 @@ thumbnail: https://user-images.githubusercontent.com/16768318/103922338-e3064700
 
 
 <p><strong>Adapted from <a href="https://developers.google.com/earth-engine/guides/image_visualization">Google Earth Engine Documentation</a>.</strong></p>
-<p>You can visualize an image using <code>Map$addLayer()</code>. If you add a layer to the map without any additional parameters, by default the Code Editor assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable. To achieve desirable visualization effects, you can provide visualization parameters to <code>Map$addLayer()</code>. Specifically, the parameters are:</p>
+<p>You can visualize an image using <a href="https://r-spatial.github.io/rgee/reference/Map.html"><strong>Map$addLayer()</strong></a>. If you add a layer to the map without any additional parameters, by default the <strong>rgee</strong> assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable. To achieve desirable visualization effects, you can provide visualization parameters to <a href="https://r-spatial.github.io/rgee/reference/Map.html"><strong>Map$addLayer()</strong></a>. Specifically, the parameters are:</p>
 <script>
   addClassKlippyToPreCode();
   addClassKlippyTo("pre.r, pre.markdown");
@@ -153,17 +155,6 @@ The opacity of the layer (0.0 is fully transparent and 1.0 is fully opaque)
 number
 </td>
 </tr>
-<tr>
-<td class="tg-8zwo">
-format
-</td>
-<td class="tg-0lax">
-Either “jpg” or “png”
-</td>
-<td class="tg-0lax">
-string
-</td>
-</tr>
 </tbody>
 </table>
 </center>
@@ -233,7 +224,7 @@ Map$addLayer(
 </div>
 <div id="masking" class="section level3">
 <h3>3. Masking</h3>
-<p>You can use <code>image$updateMask()</code> to set the opacity of individual pixels based on where pixels in a mask image are non-zero. Pixels equal to zero in the mask are excluded from computations and the opacity is set to 0 for display. The following example uses an NDWI threshold to update the mask on the NDWI layer created previously:</p>
+<p>You can use <a href="https://developers.google.com/earth-engine/apidocs/ee-image-updatemask"><strong>image$updateMask()</strong></a> to set the opacity of individual pixels based on where pixels in a mask image are non-zero. Pixels equal to zero in the mask are excluded from computations and the opacity is set to 0 for display. The following example uses an NDWI threshold to update the mask on the NDWI layer created previously:</p>
 <pre class="r"><code># Mask the non-watery parts of the image, where NDWI &lt; 0.4.
 ndwiMasked &lt;- ndwi$updateMask(ndwi$gte(0.4))
 Map$addLayer(ndwiMasked, ndwiViz, &#39;NDWI masked&#39;)</code></pre>
@@ -249,7 +240,7 @@ Map$addLayer(ndwiMasked, ndwiViz, &#39;NDWI masked&#39;)</code></pre>
 </div>
 <div id="visualization-images" class="section level3">
 <h3>4. Visualization images</h3>
-<p>Use the <code>image$visualize()</code> method to convert an image into an 8-bit RGB image for display or export. For example, to convert the false-color composite and NDWI to 3-band display images, use:</p>
+<p>Use the <a href="https://developers.google.com/earth-engine/apidocs/ee-image-visualize"><strong>image$visualize()</strong></a> method to convert an image into an 8-bit RGB image for display or export. For example, to convert the false-color composite and NDWI to 3-band display images, use:</p>
 <pre class="r"><code># Load an image.
 landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
 
@@ -271,7 +262,7 @@ ndwiRGB &lt;- ndwiMasked$visualize(
 </div>
 <div id="mosaicking" class="section level3">
 <h3>5. Mosaicking</h3>
-<p>You can use masking and <code>imageCollection$mosaic()</code> to achieve various cartographic effects. The <code>mosaic()</code> method renders layers in the output image according to their order in the input collection. The following example uses <code>mosaic()</code> to combine the masked NDWI and the false color composite and obtain a new visualization:</p>
+<p>You can use masking and <a href="https://developers.google.com/earth-engine/apidocs/ee-imagecollection-mosaic"><strong>imageCollection$mosaic()</strong></a> to achieve various cartographic effects. The <code>mosaic()</code> method renders layers in the output image according to their order in the input collection. The following example uses <code>mosaic()</code> to combine the masked NDWI and the false color composite and obtain a new visualization:</p>
 <pre class="r"><code># Mosaic the visualization layers and display (or export).
 mosaic &lt;- ee$ImageCollection(list(imageRGB, ndwiRGB))$mosaic()
 Map$addLayer(eeObject = mosaic, list(), name = &#39;mosaic&#39;)</code></pre>
@@ -281,6 +272,219 @@ Map$addLayer(eeObject = mosaic, list(), name = &#39;mosaic&#39;)</code></pre>
 <img src="https://user-images.githubusercontent.com/49989177/104064431-ee1cae00-51cb-11eb-97b5-0980634c8a25.png" width="60%"><br>
 <caption>
 <strong>Figure N°04:</strong> Mosaic of a Landsat 8 false color composite and NDWI. San Francisco bay area, USA.
+</caption>
+</center>
+<br>
+</figure>
+</div>
+<div id="integration-with-other-r-packages" class="section level3">
+<h3>6. Integration with other R packages</h3>
+<p><a href="https://r-spatial.github.io/rgee/reference/Map.html"><strong>Map$addLayer()</strong></a> creates a leaflet object
+with the following extra attributes: tokens, name, opacity, shown, min, max, palette, and legend.
+This extra data help to the users to customize their interactive maps and/or integrate <strong>Map$addLayer</strong> with other R packages such as <strong>{mapview}</strong>, <strong>{mapedit}</strong> and <strong>{leaflet}</strong>.</p>
+<pre class="r"><code>library(rgee)
+ee_Initialize()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Define the visualization parameters.
+vizParams &lt;- list(
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
+  min = 0,
+  max = 0.5,
+  gamma = c(0.95, 1.1, 1)
+)
+
+# Center the map and display the image.
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+m1 &lt;- Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)
+m1$rgee
+
+#&gt; $tokens
+#&gt; [1] &quot;https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/maps/6f68ea5563f0787171eef294011e5b1a-54a29dea5a564831913fb1c8c1653628/tiles/{z}/{x}/{y}&quot;
+#&gt; 
+#&gt; $name
+#&gt; [1] &quot;false color composite&quot;
+#&gt; 
+#&gt; $opacity
+#&gt; [1] 1
+#&gt; 
+#&gt; $shown
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $min
+#&gt; [1] NA
+#&gt; 
+#&gt; $max
+#&gt; [1] NA
+#&gt; 
+#&gt; $palette
+#&gt; $palette[[1]]
+#&gt; [1] NA
+#&gt; 
+#&gt; 
+#&gt; $legend
+#&gt; [1] FALSE</code></pre>
+<p><strong>{leaflet}:</strong> Is a R package binding (develop by Rstudio) for <strong>leaflet</strong> a open-source JavaScript library for mobile-friendly interactive maps.</p>
+<pre class="r"><code>library(leaflet)
+library(rgee)
+ee_Initialize()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Define the visualization parameters.
+vizParams &lt;- list(
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
+  min = 0,
+  max = 0.5,
+  gamma = c(0.95, 1.1, 1)
+)
+
+# Center the map and display the image.
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+m1 &lt;- Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)
+
+# Integrate with leaflet
+leaflet() %&gt;% 
+  addTiles() %&gt;% 
+  setView(-122.1899, 37.5010, 9) %&gt;% 
+  addTiles(
+    urlTemplate = m1$rgee$tokens,
+    layerId = &quot;leaflet_false_color&quot;,
+    options = leaflet::tileOptions(opacity = 1)
+  )</code></pre>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/49989177/104054975-04bb0900-51bc-11eb-9737-6e4f12063e30.png" width="50%"><br>
+<caption>
+<strong>Figure N°05:</strong> Map$addLayer and {leaflet} integration
+</caption>
+</center>
+<br>
+</figure>
+<p><strong>{mapview}:</strong> R package develop by Tim Appelhans which provides functions to very quickly and conveniently create interactive visualisations of R spatial data. It support the most popular
+R package for spatial data ({sp}, {sf}, {stars}, and {raster}).</p>
+<pre class="r"><code>library(mapview)
+library(rgee)
+
+ee_Initialize()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Define the visualization parameters.
+vizParams &lt;- list(
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
+  min = 0,
+  max = 0.5,
+  gamma = c(0.95, 1.1, 1)
+)
+
+# Center the map and display the image.
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+m1 &lt;- Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)
+
+# Integrate with mapview
+stp &lt;- st_sfc(st_point(c(-122.27234, 37.46941)), crs=4326)
+mapview(stp, m1)</code></pre>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/16768318/104090239-c6822000-5275-11eb-95b3-03fc9a94c40e.png" width="50%"><br>
+<caption>
+<strong>Figure N°06:</strong>Map$addLayer and {mapview} integration.
+</caption>
+</center>
+<br>
+</figure>
+<p><strong>{mapedit}:</strong> adds spatial data edition functionality to leaflet interactive maps (Similar to the <a href="https://developers.google.com/earth-engine/guides/playground#geometry-tools">Code Editor geometry tool</a>).</p>
+<pre class="r"><code>library(mapedit)
+library(rgee)
+
+ee_Initialize()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+
+# Define the visualization parameters.
+vizParams &lt;- list(
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
+  min = 0,
+  max = 0.5,
+  gamma = c(0.95, 1.1, 1)
+)
+
+# Center the map and display the image.
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+m1 &lt;- Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)
+
+# Integrate with mapedit
+my_geom &lt;- editMap(m1)$drawn</code></pre>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/16768318/104090341-6b046200-5276-11eb-80ed-d65e21c4032f.png" width="50%"><br>
+<caption>
+<strong>Figure N°07:</strong>Map$addLayer and {mapedit} integration.
+</caption>
+</center>
+<br>
+</figure>
+</div>
+<div id="map-operators" class="section level3">
+<h3>7. Map Operators</h3>
+<p>From the version 1.0.5, <strong>rgee</strong> support two map operators:</p>
+<pre class="r"><code>library(mapedit)
+library(rgee)
+
+ee_Initialize()
+
+# Load an image.
+landsat &lt;- ee$Image(&#39;LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318&#39;)
+ndwi &lt;- landsat$normalizedDifference(c(&#39;B3&#39;, &#39;B5&#39;))
+ndwiMasked &lt;- ndwi$updateMask(ndwi$gte(0.4))
+
+
+# Define the visualization parameters.
+vizParams &lt;- list(
+  bands = c(&#39;B5&#39;, &#39;B4&#39;, &#39;B3&#39;),
+  min = 0,
+  max = 0.5,
+  gamma = c(0.95, 1.1, 1)
+)
+
+ndwiViz &lt;- list(
+  min = 0.5,
+  max = 1,
+  palette = c(&#39;00FFFF&#39;, &#39;0000FF&#39;)
+)
+
+# Center the map and display the image.
+Map$setCenter(lon = -122.1899, lat = 37.5010, zoom = 10) # San Francisco Bay
+m1 &lt;- Map$addLayer(landsat, vizParams, &#39;false color composite&#39;)
+m2 &lt;- Map$addLayer(ndwiMasked, ndwiViz, &#39;NDWI masked&#39;)</code></pre>
+<ul>
+<li><strong>m1 <code>+</code> m2:</strong> Overlay layers.</li>
+</ul>
+<pre class="r"><code>m1 + m2</code></pre>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/16768318/104091090-5f676a00-527b-11eb-9d0c-8f7f5205559c.png" width="65%"><br>
+<caption>
+<strong>Figure N°08:</strong> Overlay map example
+</caption>
+</center>
+<br>
+</figure>
+<ul>
+<li><strong>m1<code>|</code>m2:</strong> Side by side view.</li>
+</ul>
+<pre class="r"><code>m1 | m2</code></pre>
+<figure>
+<center>
+<img src="https://user-images.githubusercontent.com/16768318/104091120-9a699d80-527b-11eb-8d4a-ee9bfd57360e.png" width="65%"><br>
+<caption>
+<strong>Figure N°08:</strong> Side by side example
 </caption>
 </center>
 <br>

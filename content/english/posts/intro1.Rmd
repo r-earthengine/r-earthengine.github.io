@@ -2,7 +2,7 @@
 author: Cesar Aybar
 categories:
 - introduction
-date: "2020-01-05"
+date: "2020-01-01"
 tags:
 - ee_install
 - ee_initialize
