@@ -6,21 +6,32 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Image Visualization</title>
       <link>https://r-earthengine.github.io/image_02/</link>
-      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/image_02/</guid>
       <description>Adapted from Google Earth Engine Documentation.
-You can visualize an image using Map$addLayer(). If you add a layer to the map without any additional parameters, by default the Code Editor assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable.</description>
+You can visualize an image using Map$addLayer(). If you add a layer to the map without any additional parameters, by default the rgee assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable.</description>
+    </item>
+    
+    <item>
+      <title>Image Overview</title>
+      <link>https://r-earthengine.github.io/image_01/</link>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/image_01/</guid>
+      <description>Adapted from Google Earth Engine Documentation.
+raster data are represented as Image objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
+ addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. ee.Image constructor Images can be loaded by pasting an Earth Engine asset ID into the ee$Image constructor.</description>
     </item>
     
     <item>
       <title>basic rgee - Best practices</title>
       <link>https://r-earthengine.github.io/intro_03/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/intro_03/</guid>
       <description>Adapted from Google Earth Engine Documentation.
@@ -31,27 +42,16 @@ This doc describes coding practices that are intended to maximize the chance of 
     <item>
       <title>basic rgee - Consideration</title>
       <link>https://r-earthengine.github.io/intro_02/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/intro_02/</guid>
       <description>Thanks to reticulate embedding a Python session within an R session, rgee and the Earth Engine Python API share the same modules, classes, functions, and methods. In other words, the logic of the syntax is the same and just as fast (just change . by a $). Notwithstanding, differences in the language design of R and Python might cause some problems in specific scenarios. We identify three bug-potential cases.</description>
     </item>
     
     <item>
-      <title>Image Overview</title>
-      <link>https://r-earthengine.github.io/image_01/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://r-earthengine.github.io/image_01/</guid>
-      <description>Adapted from Google Earth Engine Documentation.
-raster data are represented as Image objects in Earth Engine. Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.
- addClassKlippyToPreCode(); addClassKlippyTo(&#34;pre.r, pre.markdown&#34;); addKlippy(&#39;right&#39;, &#39;top&#39;, &#39;auto&#39;, &#39;1&#39;, &#39;Click to copy&#39;, &#39;Done&#39;);  1. ee.Image constructor Images can be loaded by pasting an Earth Engine asset ID into the ee$Image constructor.</description>
-    </item>
-    
-    <item>
       <title>basic rgee - First steps</title>
       <link>https://r-earthengine.github.io/intro_01/</link>
-      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/intro_01/</guid>
       <description>1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:

@@ -6,11 +6,56 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ee.Image</title>
+      <link>https://r-earthengine.github.io/tags/ee.image/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/ee.image/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ee.Image.updateMask</title>
+      <link>https://r-earthengine.github.io/tags/ee.image.updatemask/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/ee.image.updatemask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ee.Image.visualize</title>
+      <link>https://r-earthengine.github.io/tags/ee.image.visualize/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/ee.image.visualize/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ee.ImageCollection</title>
+      <link>https://r-earthengine.github.io/tags/ee.imagecollection/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/ee.imagecollection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Map.addLayer</title>
+      <link>https://r-earthengine.github.io/tags/map.addlayer/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/map.addlayer/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>image</title>
       <link>https://r-earthengine.github.io/tags/image/</link>
-      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/image/</guid>
       <description></description>
@@ -19,52 +64,25 @@
     <item>
       <title>imageCollection</title>
       <link>https://r-earthengine.github.io/tags/imagecollection/</link>
-      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/imagecollection/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>eedate_to_rdate</title>
-      <link>https://r-earthengine.github.io/tags/eedate_to_rdate/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://r-earthengine.github.io/tags/eedate_to_rdate/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>fastdistancetransform</title>
       <link>https://r-earthengine.github.io/tags/fastdistancetransform/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/fastdistancetransform/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>map</title>
-      <link>https://r-earthengine.github.io/tags/map/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://r-earthengine.github.io/tags/map/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rdate_to_eedate</title>
-      <link>https://r-earthengine.github.io/tags/rdate_to_eedate/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://r-earthengine.github.io/tags/rdate_to_eedate/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>reduceneighborhood</title>
       <link>https://r-earthengine.github.io/tags/reduceneighborhood/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/reduceneighborhood/</guid>
       <description></description>
@@ -73,7 +91,7 @@
     <item>
       <title>reduceregions</title>
       <link>https://r-earthengine.github.io/tags/reduceregions/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/reduceregions/</guid>
       <description></description>
@@ -82,16 +100,43 @@
     <item>
       <title>reducetovectors</title>
       <link>https://r-earthengine.github.io/tags/reducetovectors/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/reducetovectors/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>eedate_to_rdate</title>
+      <link>https://r-earthengine.github.io/tags/eedate_to_rdate/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/eedate_to_rdate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>map</title>
+      <link>https://r-earthengine.github.io/tags/map/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/map/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rdate_to_eedate</title>
+      <link>https://r-earthengine.github.io/tags/rdate_to_eedate/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/tags/rdate_to_eedate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>ee_initialize</title>
       <link>https://r-earthengine.github.io/tags/ee_initialize/</link>
-      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/ee_initialize/</guid>
       <description></description>
@@ -100,7 +145,7 @@
     <item>
       <title>ee_install</title>
       <link>https://r-earthengine.github.io/tags/ee_install/</link>
-      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/tags/ee_install/</guid>
       <description></description>

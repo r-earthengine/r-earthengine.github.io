@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ee.Image.updateMask on </title>
+    <link>https://r-earthengine.github.io/tags/ee.image.updatemask/</link>
+    <description>Recent content in ee.Image.updateMask on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/tags/ee.image.updatemask/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Image Visualization</title>
+      <link>https://r-earthengine.github.io/image_02/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://r-earthengine.github.io/image_02/</guid>
+      <description>Adapted from Google Earth Engine Documentation.
+You can visualize an image using Map$addLayer(). If you add a layer to the map without any additional parameters, by default the rgee assigns the first three bands to red, green and blue, respectively. The default stretch is based on the type of data in the band (e.g. floats are stretched in [0,1], 16-bit data are stretched to the full range of possible values), which may or may not be suitable.</description>
+    </item>
+    
+  </channel>
+</rss>

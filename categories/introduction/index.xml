@@ -6,11 +6,11 @@
     <description>Recent content in introduction on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/categories/introduction/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://r-earthengine.github.io/categories/introduction/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>basic rgee - Best practices</title>
       <link>https://r-earthengine.github.io/intro_03/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/intro_03/</guid>
       <description>Adapted from Google Earth Engine Documentation.
@@ -21,7 +21,7 @@ This doc describes coding practices that are intended to maximize the chance of 
     <item>
       <title>basic rgee - Consideration</title>
       <link>https://r-earthengine.github.io/intro_02/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/intro_02/</guid>
       <description>Thanks to reticulate embedding a Python session within an R session, rgee and the Earth Engine Python API share the same modules, classes, functions, and methods. In other words, the logic of the syntax is the same and just as fast (just change . by a $). Notwithstanding, differences in the language design of R and Python might cause some problems in specific scenarios. We identify three bug-potential cases.</description>
@@ -30,7 +30,7 @@ This doc describes coding practices that are intended to maximize the chance of 
     <item>
       <title>basic rgee - First steps</title>
       <link>https://r-earthengine.github.io/intro_01/</link>
-      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://r-earthengine.github.io/intro_01/</guid>
       <description>1. What is Google Earth Engine ? Google Earth Engine is a computing platform that allows users to run geospatial analysis on Google’s infrastructure. There are several ways to interact with the platform:
