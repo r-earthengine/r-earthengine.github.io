@@ -36,6 +36,13 @@ contentDir = "content/english"
     url = "/allposts/"
     weight = 5
 
+[[languages.en.menu.main]]
+    name = "Old website"
+    url = "https://csaybar.github.io/rgee-examples"
+    weight = 6
+
+
+
 [params]
     welcomemessage = false #if set true. The home page will display the content of _index.md
     authorandlicense = true
